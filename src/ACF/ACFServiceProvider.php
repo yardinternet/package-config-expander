@@ -69,7 +69,7 @@ class ACFServiceProvider extends ServiceProvider
         ]);
     }
 
-    public function addLocalFieldGroup()
+    public function addLocalFieldGroup(): void
     {
         if (! function_exists('acf_add_local_field_group')) {
             return;

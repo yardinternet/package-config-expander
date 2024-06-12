@@ -22,7 +22,9 @@ class ProtectionServiceProvider extends ServiceProvider
 
     private function hooks(): void
     {
+        // @phpstan-ignore-next-line
         add_action('template_redirect', [resolve('protect'), 'handleSite'], 10, 0);
+        // @phpstan-ignore-next-line
         add_action('login_init', [resolve('protect'), 'handleLogin'], 10, 0);
     }
 }
