@@ -4,3 +4,4 @@
 - Config file, which is overwritable from theme, excluding certain modules (ServiceProviders)
 - Improve readme
 - Add tests
+- Implement API restrictions and security

@@ -6,8 +6,14 @@ namespace Yard\ConfigExpander\Protection;
 
 class WhitelistEntity
 {
+    /**
+     * @var array<string, string>
+     */
     protected array $entity;
 
+    /**
+     * @param array<string, string> $entity
+     */
     public function __construct(array $entity)
     {
         $this->entity = $entity;
@@ -24,7 +30,7 @@ class WhitelistEntity
     }
 
     /**
-     * Could be a person or a external system.
+     * Could be a person or an external system.
      */
     public function description(): string
     {

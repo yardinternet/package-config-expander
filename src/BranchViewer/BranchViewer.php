@@ -47,6 +47,8 @@ class BranchViewer
      * 1) Converts the array to a string
      * 2) Seperates the string by '/' and limits to three sections
      * 3) Returns the last section which contains the branchname.
+     *
+     * @param string[] $branches
      */
     private function extractBranchname(array $branches): string
     {

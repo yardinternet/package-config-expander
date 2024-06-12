@@ -6,15 +6,25 @@ namespace Yard\ConfigExpander\Protection;
 
 class Protect
 {
-    private array $protectionTypes;
+    /**
+     * @var array<string, string>
+     */
+    protected array $protectionTypes;
 
     public function __construct()
     {
         $this->protectionTypes = $this->getTypeProtectionWebsite();
     }
 
+    /**
+     * @return string[]
+     */
     protected function getTypeProtectionWebsite(): array
     {
+        if (! function_exists('get_field')) {
+            return [];
+        }
+
         $type = get_field('type_protection_website', 'options');
 
         if (empty($type)) {
@@ -86,8 +96,12 @@ class Protect
         return $_SERVER['REMOTE_ADDR'] ?? '';
     }
 
+    /**
+     * @return WhitelistEntity[]
+     */
     protected function getWhitelistedEntities(): array
     {
+        // @phpstan-ignore-next-line
         $field = get_field('ip_whistelisting', 'options');
 
         if (! is_array($field) || empty($field)) {

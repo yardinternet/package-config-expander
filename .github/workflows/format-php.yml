@@ -1,4 +1,4 @@
-name: Format PHP
+name: Code Style
 
 on:
   pull_request:
@@ -20,7 +20,7 @@ jobs:
       - name: Run php-cs-fixer
         uses: docker://oskarstark/php-cs-fixer-ga
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "(auto): apply php-cs-fixer changes"
           push_options: "--force"
@@ -35,11 +35,11 @@ jobs:
       php: ${{ steps.filter.outputs.php }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         # For pull requests it's not necessary to checkout the code
         if: ${{ github.event_name != 'pull_request' }}
 
-      - uses: dorny/paths-filter@v2
+      - uses: dorny/paths-filter@v3
         id: filter
         with:
           base: ${{ github.ref }}

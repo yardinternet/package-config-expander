@@ -1,4 +1,10 @@
-# Yard Skeleton Package
+# Yard Config Expander
+
+[![Code Style](https://github.com/yardinternet/package-config-expander/actions/workflows/format-php.yml/badge.svg?no-cache)](https://github.com/yardinternet/package-config-expander/actions/workflows/format-php.yml)
+[![PHPStan](https://github.com/yardinternet/package-config-expander/actions/workflows/phpstan.yml/badge.svg?no-cache)](https://github.com/yardinternet/package-config-expander/actions/workflows/phpstan.yml)
+[![Tests](https://github.com/yardinternet/package-config-expander/actions/workflows/run-tests.yml/badge.svg?no-cache)](https://github.com/yardinternet/package-config-expander/actions/workflows/run-tests.yml)
+![Code Coverage Badge](https://raw.githubusercontent.com/yardinternet/package-config-expander/badges/coverage.svg)
+![Lines of Code Badge](https://raw.githubusercontent.com/yardinternet/package-config-expander/badges/lines-of-code.svg)
 
 This repository provides a scaffold for creating an Acorn package. For more detailed information, please refer to the [Acorn Package Development](https://roots.io/acorn/docs/package-development/) documentation.
 
@@ -11,7 +17,7 @@ To install this package using Composer, follow these steps:
     ```json
     {
       "type": "vcs",
-      "url": "git@github.com:yardinternet/skeleton-package.git"
+      "url": "git@github.com:yardinternet/package-config-expander.git"
     }
     ```
 
@@ -19,7 +25,7 @@ To install this package using Composer, follow these steps:
 
     ```json
     {
-      "yard/skeleton-package": "*"
+      "yard/config-expander": "*"
     }
     ```
 
@@ -32,19 +38,5 @@ To install this package using Composer, follow these steps:
 You can publish the config file with:
 
 ```shell
-wp acorn vendor:publish --provider="Yard\SkeletonPackage\ExampleServiceProvider"
-```
-
-## Usage
-
-From a Blade template:
-
-```blade
-@include('Example::example')
-```
-
-From WP-CLI:
-
-```shell
-wp acorn example
+wp acorn vendor:publish --provider="Yard\ConfigExpanderServiceProvider"
 ```
