@@ -9,17 +9,17 @@ class Protect
     /**
      * @var array<string, string>
      */
-    protected array $protectionTypes;
+    protected array $protectionTypesWebsite;
 
     public function __construct()
     {
-        $this->protectionTypes = $this->getTypeProtectionWebsite();
+        $this->protectionTypesWebsite = $this->getProtectionTypesWebsite();
     }
 
     /**
      * @return string[]
      */
-    protected function getTypeProtectionWebsite(): array
+    protected function getProtectionTypesWebsite(): array
     {
         if (! function_exists('get_field')) {
             return [];
@@ -62,19 +62,20 @@ class Protect
 
     protected function checkIfVisitorHasAccess(string $type): bool
     {
-        if (! in_array($type, $this->protectionTypes)) {
+        if (! in_array($type, $this->protectionTypesWebsite)) {
             return true;
         }
 
         foreach ($this->getWhitelistedEntities() as $whitelistEntity) {
-            if (! in_array($whitelistEntity->type(), $this->protectionTypes) && $whitelistEntity->type() !== 'both') {
-                continue;
-            }
-            if ($this->getCurrentVisitorIP() !== $whitelistEntity->ipAddress()) {
+            if (! $this->intersectsWithProtectedTypesWebsite($whitelistEntity)){
                 continue;
             }
 
-            if ($whitelistEntity->type() !== $type && $whitelistEntity->type() !== 'both') {
+            if (! $this->currentProtectionTypeMatchesWhitelist($type, $whitelistEntity)) {
+                continue;
+            }
+
+            if ($this->ipCurrentVisitor() !== $whitelistEntity->ipAddress()) {
                 continue;
             }
 
@@ -84,6 +85,23 @@ class Protect
         return false;
     }
 
+    /**
+     * Validate if the whitelisted entity types intersect with the protection types of the website.
+     * Without an intersection the visitor should be denied access.
+     */
+    protected function intersectsWithProtectedTypesWebsite(WhitelistEntity $whitelistEntity): bool
+    {
+        return ! empty(array_intersect($whitelistEntity->types(), $this->protectionTypesWebsite));
+    }
+
+    /**
+     * The type which is validated should match one of the whitelisted entity protection types.
+     */
+    protected function currentProtectionTypeMatchesWhitelist(string $type, WhitelistEntity $whitelistEntity): bool
+    {
+        return in_array($type, $whitelistEntity->types());
+    }
+
     protected function denyAccess(): void
     {
         header('HTTP/1.0 401 Unauthorized');
@@ -91,7 +109,7 @@ class Protect
         exit;
     }
 
-    protected function getCurrentVisitorIP(): string
+    protected function ipCurrentVisitor(): string
     {
         return $_SERVER['REMOTE_ADDR'] ?? '';
     }

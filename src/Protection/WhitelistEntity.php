@@ -24,6 +24,20 @@ class WhitelistEntity
         return $this->entity['type'] ?? '';
     }
 
+    /**
+     * @return string[]
+     */
+    public function types(): array
+    {
+        $type = $this->type();
+
+        if (empty($type)) {
+            return [];
+        }
+
+        return 'both' === $type ? ['login', 'site', 'both'] : [$type];
+    }
+
     public function ipAddress(): string
     {
         return $this->entity['whitelisted_ip_address'] ?? '';
