@@ -38,5 +38,5 @@ To install this package using Composer, follow these steps:
 You can publish the config file with:
 
 ```shell
-wp acorn vendor:publish --provider="Yard\ConfigExpanderServiceProvider"
+wp acorn vendor:publish --provider="Yard\ConfigExpander\ConfigExpanderServiceProvider"
 ```

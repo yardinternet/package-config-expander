@@ -23,7 +23,7 @@ class BranchViewerServiceProvider extends ServiceProvider
 
     public function addBranchViewer(WP_Admin_Bar $adminBar): void
     {
-        if (! \current_user_can('manage_options')) {
+        if (! current_user_can('manage_options')) {
             return;
         }
 

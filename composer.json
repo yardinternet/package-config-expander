@@ -43,10 +43,7 @@
 	"extra": {
 		"acorn": {
 			"providers": [
-				"Yard\\ConfigExpander\\ConfigExpanderServiceProvider",
-				"Yard\\ConfigExpander\\BranchViewer\\BranchViewerServiceProvider",
-				"Yard\\ConfigExpander\\ACF\\ACFServiceProvider",
-				"Yard\\ConfigExpander\\Protection\\ProtectionServiceProvider"
+				"Yard\\ConfigExpander\\ConfigExpanderServiceProvider"
 			],
 			"aliases": {
 				"Example": "Yard\\ConfigExpander\\Facades\\Example"
