@@ -3,8 +3,8 @@
 [![Code Style](https://github.com/yardinternet/package-config-expander/actions/workflows/format-php.yml/badge.svg?no-cache)](https://github.com/yardinternet/package-config-expander/actions/workflows/format-php.yml)
 [![PHPStan](https://github.com/yardinternet/package-config-expander/actions/workflows/phpstan.yml/badge.svg?no-cache)](https://github.com/yardinternet/package-config-expander/actions/workflows/phpstan.yml)
 [![Tests](https://github.com/yardinternet/package-config-expander/actions/workflows/run-tests.yml/badge.svg?no-cache)](https://github.com/yardinternet/package-config-expander/actions/workflows/run-tests.yml)
-![Code Coverage Badge](https://raw.githubusercontent.com/yardinternet/package-config-expander/badges/coverage.svg)
-![Lines of Code Badge](https://raw.githubusercontent.com/yardinternet/package-config-expander/badges/lines-of-code.svg)
+![Code Coverage Badge](https://github.com/yardinternet/package-config-expander/blob/badges/coverage.svg)
+![Lines of Code Badge](https://github.com/yardinternet/package-config-expander/blob/badges/lines-of-code.svg)
 
 This repository provides a scaffold for creating an Acorn package. For more detailed information, please refer to the [Acorn Package Development](https://roots.io/acorn/docs/package-development/) documentation.
 
