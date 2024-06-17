@@ -1,6 +1,8 @@
 name: Create badges
 
 on:
+  pull_request:
+    types: [opened]
   release:
     types: [published]
 
