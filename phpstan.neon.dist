@@ -8,3 +8,5 @@ parameters:
         - src
     tmpDir: build/phpstan
     ignoreErrors:
+        - '#has parameter \$request with generic class WP_REST_Request but does not specify its types#'
+        - '#has parameter \$result with generic class WP_REST_Request but does not specify its types#'

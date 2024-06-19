@@ -6,34 +6,6 @@ namespace Yard\ConfigExpander\Protection;
 
 class Protect
 {
-    /**
-     * @var array<string, string>
-     */
-    protected array $protectionTypesWebsite;
-
-    public function __construct()
-    {
-        $this->protectionTypesWebsite = $this->getProtectionTypesWebsite();
-    }
-
-    /**
-     * @return string[]
-     */
-    protected function getProtectionTypesWebsite(): array
-    {
-        if (! function_exists('get_field')) {
-            return [];
-        }
-
-        $type = get_field('type_protection_website', 'options');
-
-        if (empty($type)) {
-            return [];
-        }
-
-        return 'both' === $type ? ['login', 'site', 'both'] : [$type];
-    }
-
     public function handleSite(): void
     {
         $this->authorizeAccess('site');
@@ -62,7 +34,7 @@ class Protect
 
     protected function checkIfVisitorHasAccess(string $type): bool
     {
-        if (! in_array($type, $this->protectionTypesWebsite)) {
+        if (! in_array($type, $this->getProtectionTypesWebsite())) {
             return true;
         }
 
@@ -91,7 +63,7 @@ class Protect
      */
     protected function intersectsWithProtectedTypesWebsite(WhitelistEntity $whitelistEntity): bool
     {
-        return ! empty(array_intersect($whitelistEntity->types(), $this->protectionTypesWebsite));
+        return ! empty(array_intersect($whitelistEntity->types(), $this->getProtectionTypesWebsite()));
     }
 
     /**
@@ -112,6 +84,24 @@ class Protect
     protected function ipCurrentVisitor(): string
     {
         return $_SERVER['REMOTE_ADDR'] ?? '';
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getProtectionTypesWebsite(): array
+    {
+        if (! function_exists('get_field')) {
+            return [];
+        }
+
+        $type = get_field('type_protection_website', 'options');
+
+        if (empty($type)) {
+            return [];
+        }
+
+        return 'both' === $type ? ['login', 'site', 'both'] : [$type];
     }
 
     /**

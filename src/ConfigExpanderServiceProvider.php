@@ -29,21 +29,30 @@ class ConfigExpanderServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
     }
 
-    protected function callServiceProviders(string $method = '')
+    private function callServiceProviders(string $method = ''): void
     {
         if (empty($method)) {
             throw new Exception('No method specified which can be used to call specific method of a service provider.');
         }
 
-        $configFile = resolve('config')->get('yard-config-expander', []);
-        $providers = $configFile['providers'] ?? [];
+        $providers = resolve('config')->get('yard-config-expander.providers', []);
+
+        if (! is_array($providers)) {
+            return;
+        }
 
         foreach ($providers as $provider => $args) {
-            if (! $args['enabled'] ?? false) {
+            if (! class_exists($provider) || ! ($args['enabled'] ?? false)) {
                 continue;
             }
 
-            (new $provider($this->app))->$method();
+            $class = new $provider($this->app);
+
+            if (! is_object($class)) {
+                continue;
+            }
+
+            $class->$method();
         }
     }
 }

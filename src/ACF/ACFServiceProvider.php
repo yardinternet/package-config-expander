@@ -52,7 +52,7 @@ class ACFServiceProvider extends ServiceProvider
 
     public function initSettingsPage(): void
     {
-        $current_user = \wp_get_current_user();
+        $current_user = wp_get_current_user();
 
         if (! in_array('administrator', $current_user->roles)) {
             return;
@@ -62,7 +62,7 @@ class ACFServiceProvider extends ServiceProvider
             return;
         }
 
-        \acf_add_options_page([
+        acf_add_options_page([
             'page_title' => __('Yard Config+'),
             'icon_url' => 'dashicons-yard-y',
             'position' => 66, // Investigate this position a bit more.
