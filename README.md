@@ -40,3 +40,66 @@ You can publish the config file with:
 ```shell
 wp acorn vendor:publish --provider="Yard\ConfigExpander\ConfigExpanderServiceProvider"
 ```
+
+## Configuration
+
+After the configuration file has been published, you can customize the package settings by overwriting them.
+The location of the published configuration file is: 'web/app/themes/{theme-name}/config/yard-config-expander.php
+
+### Calling Service Providers
+
+Service providers are defined in a configuration file `yard-config-expander.php`. Each provider has an `enabled` flag to indicate whether it should be invoked.
+
+#### Example Configuration for Service Providers
+
+```php
+$config = [
+  'providers' => [
+    'Yard\ConfigExpander\ACF\ACFServiceProvider' => [
+      'enabled' => true,
+    ],
+    'Yard\ConfigExpander\BranchViewer\BranchViewerServiceProvider' => [
+      'enabled' => true,
+    ],
+    'Yard\ConfigExpander\Protection\ProtectionServiceProvider' => [
+      'enabled' => true,
+    ],
+    'Yard\ConfigExpander\Disable\DisableServiceProvider' => [
+      'enabled' => true,
+    ],
+  ]
+];
+```
+
+### Settings
+
+Additional settings are also defined in the same configuration file `yard-config-expander.php`.
+These settings can be customized to fit your specific needs.
+
+```php
+$config = [
+  'defaults' => [
+    'admin' => [
+      'AUTOMATIC_UPDATER_DISABLED' => true,
+      'AUTOSAVE_INTERVAL' => 900,
+      'DISABLE_COMMENTS' => true,
+      'DISABLE_POSTS' => true,
+      'DISALLOW_FILE_EDIT' => true,
+      'DISABLE_ADMIN_NOTICES_FOR_NON_ADMINS' => true,
+      'UNSET_ADMIN_ROLE_FOR_NON_ADMINS' => true,
+      'WP_CACHE' => false,
+    ],
+    'api' => [
+      'DISABLE_REST_API_USERS' => true,
+      'DISABLE_REST_API_OEMBED' => true,
+    ],
+      'public' => [
+      'FEEDS_ENABLED' => false,
+      'XMLRPC_ENABLED' => false,
+      'XMLRPC_ALLOWED_METHODS' => [],
+      'CLEANUP_HEADERS' => true,
+      'DISABLE_EMOJICONS' => true,
+    ],
+  ],
+];
+```
