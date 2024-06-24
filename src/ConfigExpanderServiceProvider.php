@@ -12,21 +12,23 @@ class ConfigExpanderServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/yard-config-expander.php',
+            __DIR__ . '/../config/yard-config-expander.php',
             'yard-config-expander'
         );
 
         $this->callServiceProviders('register');
+
+        load_textdomain('config-expander', __DIR__ . '/../languages/config-expander-nl_NL.mo');
     }
 
     public function boot(): void
     {
         $this->publishes([
-            __DIR__.'/../config/yard-config-expander.php' => $this->app->configPath('yard-config-expander.php'),
+            __DIR__ . '/../config/yard-config-expander.php' => $this->app->configPath('yard-config-expander.php'),
         ], 'config');
 
         $this->callServiceProviders('boot');
-        $this->loadRoutesFrom(__DIR__.'/routes/web.php');
+        $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
     }
 
     private function callServiceProviders(string $method = ''): void

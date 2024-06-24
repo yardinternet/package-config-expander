@@ -44,7 +44,7 @@ class DisableFeed
     public static function disableFeed(): void
     {
         // @phpstan-ignore-next-line
-        $output = sprintf(__('This link does not work, go to our website: <a href="%s">%s</a>.', 'config-expander'), get_site_url(), get_bloginfo('name'));
+        $output = sprintf(__('This link does not work, go to our website: <a href="%s">%s</a>.', 'config-expander'), get_home_url(), get_bloginfo('name'));
 
         wp_die($output);
     }

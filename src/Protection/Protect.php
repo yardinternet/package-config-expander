@@ -39,7 +39,7 @@ class Protect
         }
 
         foreach ($this->getWhitelistedEntities() as $whitelistEntity) {
-            if (! $this->intersectsWithProtectedTypesWebsite($whitelistEntity)){
+            if (! $this->intersectsWithProtectedTypesWebsite($whitelistEntity)) {
                 continue;
             }
 
@@ -77,7 +77,8 @@ class Protect
     protected function denyAccess(): void
     {
         header('HTTP/1.0 401 Unauthorized');
-        echo 'Je hebt geen toestemming om deze pagina te bekijken.';
+        // @phpstan-ignore-next-line
+        echo __('You\'re not allowed to view this page.', 'config-expander');
         exit;
     }
 

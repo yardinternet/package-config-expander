@@ -2,4 +2,3 @@
 
 - Improve readme
 - Add tests
-- Translations
