@@ -103,3 +103,21 @@ $config = [
   ],
 ];
 ```
+
+### Plugin defaults
+
+Considering the following section of the configuration file `yard-config-expander.php`:
+
+```php
+$config = [
+  'cleanup' => [
+    'plugins' => [
+      Yard\ConfigExpander\Cleanup\Plugins\Stream::class,
+      Yard\ConfigExpander\Cleanup\Plugins\SearchWP::class
+    ]
+  ]
+]
+```
+
+The provided classes are designed to manage the settings and cleanup tasks for various plugins within a WordPress environment.
+These classes must extend the common base class `BaseAbstract` and include methods to handle both single-site and multi-site configurations.
