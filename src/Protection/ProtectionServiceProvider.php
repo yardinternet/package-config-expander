@@ -11,7 +11,7 @@ class ProtectionServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton('protect', function ($app) {
-            return new Protect;
+            return new Protect();
         });
     }
 
@@ -22,6 +22,10 @@ class ProtectionServiceProvider extends ServiceProvider
 
     private function hooks(): void
     {
+        if (defined('WP_CLI') && WP_CLI) {
+            return;
+        }
+
         // @phpstan-ignore-next-line
         add_action('template_redirect', [resolve('protect'), 'handleSite'], 10, 0);
         // @phpstan-ignore-next-line
