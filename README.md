@@ -121,3 +121,13 @@ $config = [
 
 The provided classes are designed to manage the settings and cleanup tasks for various plugins within a WordPress environment.
 These classes must extend the common base class `BaseAbstract` and include methods to handle both single-site and multi-site configurations.
+
+## Hooks
+
+### Clean-up
+
+#### Allow 'unfiltered_html' capability for administrators, superusers and editors only
+
+```php
+add_filter('yard::config-expander/cleanup/allow-unfiltered-html', '__return_true');
+```

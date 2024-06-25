@@ -23,6 +23,7 @@ class CleanupServiceProvider extends ServiceProvider
     protected function hooks(): void
     {
         add_action('wp_loaded', [$this, 'cleanupPlugins'], 10, 0);
+        add_filter('map_meta_cap', [new MapMetaCap(), 'unfilteredHTML'], 10, 4);
 
         // @phpstan-ignore-next-line
         add_filter('style_loader_src', [resolve('scripts-styles'), 'removeWordPressVersion'], 9999, 2);
