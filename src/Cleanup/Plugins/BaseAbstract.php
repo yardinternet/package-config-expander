@@ -16,7 +16,7 @@ abstract class BaseAbstract
             return false;
         }
 
-        return \is_plugin_active($this->plugin);
+        return is_plugin_active($this->plugin);
     }
 
     protected function pluginIsNetworkActived(): bool
@@ -25,6 +25,6 @@ abstract class BaseAbstract
             return false;
         }
 
-        return \is_plugin_active_for_network($this->plugin);
+        return is_plugin_active_for_network($this->plugin);
     }
 }

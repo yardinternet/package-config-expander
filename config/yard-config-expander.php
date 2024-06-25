@@ -19,6 +19,9 @@ return [
         'Yard\ConfigExpander\Cleanup\CleanupServiceProvider' => [
             'enabled' => true,
         ],
+        'Yard\ConfigExpander\Licenses\LicensesServiceProvider' => [
+            'enabled' => true,
+        ],
     ],
     'defaults' => [
         'admin' => [
@@ -48,5 +51,13 @@ return [
             Yard\ConfigExpander\Cleanup\Plugins\Stream::class,
             Yard\ConfigExpander\Cleanup\Plugins\SearchWP::class
         ]
+    ],
+    'licenses' => [
+        'ACF_PRO_LICENSE_KEY' => $_SERVER['ACF_PRO_LICENSE_KEY'] ?? null,
+        'FACETWP_LICENSE_KEY' => $_SERVER['FACETWP_LICENSE_KEY'] ?? null,
+        'GF_LICENSE_KEY' => $_SERVER['GF_LICENSE_KEY'] ?? null,
+        'SEARCHWP_LICENSE_KEY' => $_SERVER['SEARCHWP_LICENSE_KEY'] ?? null,
+        'SEOPRESS_LICENSE_KEY' => $_SERVER['SEOPRESS_LICENSE_KEY'] ?? null,
+        'WPMDB_LICENSE_KEY' => $_SERVER['WPMDB_LICENSE_KEY'] ?? null
     ]
 ];
