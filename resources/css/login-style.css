@@ -1,0 +1,42 @@
+body.login {
+	background: #f1f1f1;
+}
+
+.login h1 a {
+	background: none;
+	background-repeat: no-repeat !important;
+	background-position: center center !important;
+	width: 100%;
+}
+
+.login-action-login #loginform,
+.login-action-lostpassword #lostpasswordform {
+	background: #21252a;
+	border: none;
+	margin-top: 0;
+}
+
+.login-action-login #loginform label,
+.login-action-lostpassword #lostpasswordform label {
+	color: #fff;
+}
+
+#wp-submit {
+	background: #37aecc;
+}
+
+.login .message,
+.login .success {
+	border-color: #37aecc;
+}
+
+#login #nav a,
+#login #backtoblog a {
+	color: #21252a;
+	font-weight: bold;
+}
+
+.login input[type='text']:focus,
+.login input[type='password']:focus {
+	border-color: #37aecc;
+}

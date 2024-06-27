@@ -17,3 +17,13 @@ Route::get('/yard/config-expander/resources/fonts/yard-y-icon.woff', function ()
 Route::get('/yard/config-expander/resources/fonts/yard-y-icon.ttf', function () {
     return response()->file(__DIR__.'/../../resources/fonts/yard-y-icon.ttf');
 });
+
+Route::get('/yard/config-expander/resources/css/login-style.css', function () {
+    return response()->file(__DIR__.'/../../resources/css/login-style.css', [
+        'Content-Type' => 'text/css',
+    ]);
+});
+
+Route::get('/yard/config-expander/resources/images/logo-yard-black.svg', function () {
+    return response()->file(__DIR__.'/../../resources/images/logo-yard-black.svg');
+});

@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace Yard\ConfigExpander\ACF;
 
 use Illuminate\Support\ServiceProvider;
+use Yard\ConfigExpander\Traits\Route;
 
 class ACFServiceProvider extends ServiceProvider
 {
+    use Route;
+
     public function boot(): void
     {
         /**
@@ -38,11 +41,6 @@ class ACFServiceProvider extends ServiceProvider
 
         wp_register_style('yard_y_plugin_icon', $this->route('/yard/config-expander/resources/styles/yard-y-icon'));
         wp_enqueue_style('yard_y_plugin_icon');
-    }
-
-    public function route(string $path): string
-    {
-        return config('app.url') . $path;
     }
 
     public function init(): void

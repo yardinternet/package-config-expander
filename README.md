@@ -67,6 +67,15 @@ $config = [
     'Yard\ConfigExpander\Disable\DisableServiceProvider' => [
       'enabled' => true,
     ],
+    'Yard\ConfigExpander\Cleanup\CleanupServiceProvider' => [
+      'enabled' => true,
+    ],
+    'Yard\ConfigExpander\Licenses\LicensesServiceProvider' => [
+      'enabled' => true,
+    ],
+    'Yard\ConfigExpander\LoginScreenCustomization\LoginScreenCustomizationServiceProvider' => [
+      'enabled' => true,
+    ],
   ]
 ];
 ```
@@ -124,10 +133,46 @@ These classes must extend the common base class `BaseAbstract` and include metho
 
 ## Hooks
 
+The hooks are divided by sections based on the package directories.
+
 ### Clean-up
 
 #### Allow 'unfiltered_html' capability for administrators, superusers and editors only
 
 ```php
 add_filter('yard::config-expander/cleanup/allow-unfiltered-html', '__return_true');
+```
+
+### Login screen customization
+
+#### Overwrite the stylesheet file (URL)
+
+```php
+add_filter('yard::config-expander/login/style-file', function(string $source) {
+  return $source;
+}, 10, 1);
+```
+
+#### Overwrite the logo above the login form (URL)
+
+```php
+add_filter('yard::config-expander/login/logo', function(string $logo){
+  return $logo;
+}, 10, 1);
+```
+
+#### Customize the URL of the anchor around the logo
+
+```php
+add_filter('yard::config-expander/login/logo-url', function(string $logo){
+  return $logo;
+}, 10, 1);
+```
+
+#### Overwrite the title of the link (value inside the anchor)
+
+```php
+add_filter('yard::config-expander/login/logo-name', function(string $logo){
+  return $logo;
+}, 10, 1);
 ```

@@ -22,6 +22,9 @@ return [
         'Yard\ConfigExpander\Licenses\LicensesServiceProvider' => [
             'enabled' => true,
         ],
+        'Yard\ConfigExpander\LoginScreenCustomization\LoginScreenCustomizationServiceProvider' => [
+            'enabled' => true,
+        ],
     ],
     'defaults' => [
         'admin' => [
