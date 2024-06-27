@@ -11,6 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2024-06-24T11:24:34+00:00\n"
 "Language: \n"
 
+#: src/ACF/ACFServiceProvider.php:21
+msgid "The required plugin for the Config Expander package <strong>Advanced Custom Fields PRO</strong> is not active. Please install and activate it."
+msgstr "De vereiste plugin voor de Config Expander package <strong>Advanced Custom Fields PRO</strong> is niet actief. Installeer en activeer de plugin."
+
 #: src/Disable/DisableFeed.php:47
 msgid "This link does not work, go to our website: <a href=\"%s\">%s</a>."
 msgstr "Deze link bestaat niet, ga naar onze website: <a href=\"%s\">%s</a>."

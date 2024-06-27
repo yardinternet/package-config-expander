@@ -12,6 +12,10 @@ msgstr ""
 "X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: config-expander\n"
 
+#: src/ACF/ACFServiceProvider.php:21
+msgid "The required plugin for the Config Expander package <strong>Advanced Custom Fields PRO</strong> is not active. Please install and activate it."
+msgstr ""
+
 #: src/Disable/DisableFeed.php:47
 msgid "This link does not work, go to our website: <a href=\"%s\">%s</a>."
 msgstr ""
