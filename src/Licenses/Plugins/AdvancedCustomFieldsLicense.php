@@ -14,14 +14,12 @@ class AdvancedCustomFieldsLicense extends AbstractLicense
             return;
         }
 
-        $licenseKey = get_option('acf_pro_license');
-
-        if (false !== $licenseKey) {
-            update_option('acf_pro_license', $this->getLicense());
-
-            return;
+        if (function_exists('acf_pro_update_license')) {
+            acf_pro_update_license($this->getLicense());
         }
 
-        add_option('acf_pro_license', $this->getLicense());
+        if (function_exists('acf_pro_get_license_status')) {
+            acf_pro_get_license_status(false); // Uses cached data when cache is not expired.
+        }
     }
 }
