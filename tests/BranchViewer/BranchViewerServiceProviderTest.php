@@ -15,10 +15,6 @@ beforeEach(function () {
     if (! file_exists(dirname($this->validGitPath))) {
         mkdir(dirname($this->validGitPath), 0777, true);
     }
-
-    if (! defined('ABSPATH')) {
-        define('ABSPATH', __DIR__ . '/');
-    }
 });
 
 /**
