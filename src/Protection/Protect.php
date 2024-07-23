@@ -98,7 +98,7 @@ class Protect
 
         $type = get_field('type_protection_website', 'options');
 
-        if (empty($type)) {
+        if (empty($type) || $type === 'none') {
             return [];
         }
 
