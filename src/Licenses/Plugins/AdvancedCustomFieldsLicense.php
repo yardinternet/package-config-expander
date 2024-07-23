@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yard\ConfigExpander\Licenses\Plugins;
 
 use Yard\ConfigExpander\Licenses\Contracts\AbstractLicense;

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Yard\ConfigExpander\Tests;
 
 use Yard\ConfigExpander\Protection\Protect;
-use Yard\ConfigExpander\Protection\WhitelistEntity;
 
 beforeEach(function () {
     $_SERVER = [];
@@ -13,43 +12,43 @@ beforeEach(function () {
 
 test('handleSite authorizes access', function () {
     $protect = $this->getMockBuilder(Protect::class)
-                    ->onlyMethods(['authorizeAccess'])
-                    ->getMock();
+        ->onlyMethods(['authorizeAccess'])
+        ->getMock();
 
     $protect->expects($this->once())
-            ->method('authorizeAccess')
-            ->with('site');
+        ->method('authorizeAccess')
+        ->with('site');
 
     $protect->handleSite();
 });
 
 test('handleLogin does not authorize access if not login page', function () {
     $protect = $this->getMockBuilder(Protect::class)
-                    ->onlyMethods(['isLoginPage', 'authorizeAccess'])
-                    ->getMock();
+        ->onlyMethods(['isLoginPage', 'authorizeAccess'])
+        ->getMock();
 
     $protect->expects($this->once())
-            ->method('isLoginPage')
-            ->willReturn(false);
+        ->method('isLoginPage')
+        ->willReturn(false);
 
     $protect->expects($this->never())
-            ->method('authorizeAccess');
+        ->method('authorizeAccess');
 
     $protect->handleLogin();
 });
 
 test('handleLogin authorizes access if login page', function () {
     $protect = $this->getMockBuilder(Protect::class)
-                    ->onlyMethods(['isLoginPage', 'authorizeAccess'])
-                    ->getMock();
+        ->onlyMethods(['isLoginPage', 'authorizeAccess'])
+        ->getMock();
 
     $protect->expects($this->once())
-            ->method('isLoginPage')
-            ->willReturn(true);
+        ->method('isLoginPage')
+        ->willReturn(true);
 
     $protect->expects($this->once())
-            ->method('authorizeAccess')
-            ->with('login');
+        ->method('authorizeAccess')
+        ->with('login');
 
     $protect->handleLogin();
 });
@@ -63,32 +62,32 @@ test('isLoginPage returns true for wp-login.php', function () {
 
 test('authorizeAccess denies access when checkIfVisitorHasAccess returns false', function () {
     $protect = $this->getMockBuilder(Protect::class)
-                    ->onlyMethods(['checkIfVisitorHasAccess', 'denyAccess'])
-                    ->getMock();
+        ->onlyMethods(['checkIfVisitorHasAccess', 'denyAccess'])
+        ->getMock();
 
     $protect->expects($this->once())
-            ->method('checkIfVisitorHasAccess')
-            ->with('site')
-            ->willReturn(false);
+        ->method('checkIfVisitorHasAccess')
+        ->with('site')
+        ->willReturn(false);
 
     $protect->expects($this->once())
-            ->method('denyAccess');
+        ->method('denyAccess');
 
     invokeProtectedMethod($protect, 'authorizeAccess', ['site']);
 });
 
 test('authorizeAccess grants access when checkIfVisitorHasAccess returns true', function () {
     $protect = $this->getMockBuilder(Protect::class)
-                    ->onlyMethods(['checkIfVisitorHasAccess', 'denyAccess'])
-                    ->getMock();
+        ->onlyMethods(['checkIfVisitorHasAccess', 'denyAccess'])
+        ->getMock();
 
     $protect->expects($this->once())
-            ->method('checkIfVisitorHasAccess')
-            ->with('site')
-            ->willReturn(true);
+        ->method('checkIfVisitorHasAccess')
+        ->with('site')
+        ->willReturn(true);
 
     $protect->expects($this->never())
-            ->method('denyAccess');
+        ->method('denyAccess');
 
     invokeProtectedMethod($protect, 'authorizeAccess', ['site']);
 });

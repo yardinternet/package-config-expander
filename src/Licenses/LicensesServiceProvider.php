@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Yard\ConfigExpander\Licenses;
 
 use Illuminate\Support\ServiceProvider;
-use Yard\ConfigExpander\Licenses\LicenseManager;
 use Yard\ConfigExpander\Licenses\Plugins\AdvancedCustomFieldsLicense;
 use Yard\ConfigExpander\Licenses\Plugins\FacetWPLicense;
 use Yard\ConfigExpander\Licenses\Plugins\GravityFormsLicense;
@@ -34,7 +33,7 @@ class LicensesServiceProvider extends ServiceProvider
             FacetWPLicense::class,
             SearchWPLicense::class,
             SeoPressLicense::class,
-            WpMigrateLicense::class
+            WpMigrateLicense::class,
         ])->load();
     }
 }

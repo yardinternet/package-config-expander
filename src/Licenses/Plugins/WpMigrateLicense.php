@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yard\ConfigExpander\Licenses\Plugins;
 
 use WP_User;
@@ -66,7 +68,7 @@ class WpMigrateLicense extends AbstractLicense
         $args = [
             'search' => '*@yard.nl*',
             'search_columns' => ['user_email'],
-            'role' => 'Administrator'
+            'role' => 'Administrator',
         ];
 
         $userQuery = new WP_User_Query($args);

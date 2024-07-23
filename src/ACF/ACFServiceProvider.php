@@ -18,6 +18,7 @@ class ACFServiceProvider extends ServiceProvider
          */
         if (! is_plugin_active('advanced-custom-fields-pro/acf.php')) {
             add_action('admin_notices', function () {
+                // @phpstan-ignore-next-line
                 echo sprintf('<div class="notice notice-error"><p><strong>Yard Digital: </strong>%s</p></div>', __('The required plugin for the Config Expander package <strong>Advanced Custom Fields PRO</strong> is not active. Please install and activate it.', 'config-expander'));
             });
 

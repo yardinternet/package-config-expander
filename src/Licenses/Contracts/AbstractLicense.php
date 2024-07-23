@@ -1,8 +1,8 @@
 <?php
 
-namespace Yard\ConfigExpander\Licenses\Contracts;
+declare(strict_types=1);
 
-use Yard\ConfigExpander\Licenses\Contracts\LicenseInterface;
+namespace Yard\ConfigExpander\Licenses\Contracts;
 
 abstract class AbstractLicense implements LicenseInterface
 {
@@ -10,7 +10,7 @@ abstract class AbstractLicense implements LicenseInterface
     protected const PLUGIN_LICENSE_CONSTANT = '';
 
     /**
-     * @var array<string, string> $licenses
+     * @var array<string, string>
      */
     protected array $licenses;
 

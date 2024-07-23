@@ -52,8 +52,8 @@ return [
     'cleanup' => [
         'plugins' => [
             Yard\ConfigExpander\Cleanup\Plugins\Stream::class,
-            Yard\ConfigExpander\Cleanup\Plugins\SearchWP::class
-        ]
+            Yard\ConfigExpander\Cleanup\Plugins\SearchWP::class,
+        ],
     ],
     'licenses' => [
         'ACF_PRO_LICENSE_KEY' => $_SERVER['ACF_PRO_LICENSE_KEY'] ?? null,
@@ -61,6 +61,6 @@ return [
         'GF_LICENSE_KEY' => $_SERVER['GF_LICENSE_KEY'] ?? null,
         'SEARCHWP_LICENSE_KEY' => $_SERVER['SEARCHWP_LICENSE_KEY'] ?? null,
         'SEOPRESS_LICENSE_KEY' => $_SERVER['SEOPRESS_LICENSE_KEY'] ?? null,
-        'WPMDB_LICENSE_KEY' => $_SERVER['WPMDB_LICENSE_KEY'] ?? null
-    ]
+        'WPMDB_LICENSE_KEY' => $_SERVER['WPMDB_LICENSE_KEY'] ?? null,
+    ],
 ];

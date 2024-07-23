@@ -56,7 +56,7 @@ class DisableServiceProvider extends ServiceProvider
             DisablePosts::init();
         }
 
-        if ($settings['DISABLE_COMMENTS'] ?? true){
+        if ($settings['DISABLE_COMMENTS'] ?? true) {
             DisableComments::init();
         }
 

@@ -10,12 +10,12 @@ use Yard\ConfigExpander\Licenses\Contracts\LicenseInterface;
 class LicenseManager
 {
     /**
-     * @var array<string, object> $plugins
+     * @var array<string, object>
      */
     private array $plugins = [];
 
     /**
-     * @var array<string, string> $licenses
+     * @var array<string, string>
      */
     private array $licenses = [];
 
