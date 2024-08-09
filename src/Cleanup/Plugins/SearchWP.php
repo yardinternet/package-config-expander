@@ -10,7 +10,7 @@ class SearchWP extends BaseAbstract
 
     public function cleanup(): void
     {
-        if (! $this->pluginIsActive()) {
+        if (! $this->isPluginActive($this->plugin)) {
             return;
         }
 

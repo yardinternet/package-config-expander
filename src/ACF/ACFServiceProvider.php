@@ -5,18 +5,17 @@ declare(strict_types=1);
 namespace Yard\ConfigExpander\ACF;
 
 use Illuminate\Support\ServiceProvider;
+use Yard\ConfigExpander\Traits\PluginActive;
 use Yard\ConfigExpander\Traits\Route;
 
 class ACFServiceProvider extends ServiceProvider
 {
+    use PluginActive;
     use Route;
 
     public function boot(): void
     {
-        /**
-         * Add capability check perhaps?
-         */
-        if (! is_plugin_active('advanced-custom-fields-pro/acf.php')) {
+        if (! $this->isPluginActive('advanced-custom-fields-pro/acf.php')) {
             add_action('admin_notices', function () {
                 // @phpstan-ignore-next-line
                 echo sprintf('<div class="notice notice-error"><p><strong>Yard Digital: </strong>%s</p></div>', __('The required plugin for the Config Expander package <strong>Advanced Custom Fields PRO</strong> is not active. Please install and activate it.', 'config-expander'));
@@ -99,7 +98,7 @@ class ACFServiceProvider extends ServiceProvider
                 ],
                 [
                     'key' => 'field_666962bd81792',
-                    'label' => 'Type becherming',
+                    'label' => 'Type bescherming',
                     'name' => 'type_protection_website',
                     'aria-label' => '',
                     'type' => 'select',

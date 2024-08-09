@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace Yard\ConfigExpander\Licenses\Contracts;
 
+use Yard\ConfigExpander\Traits\PluginActive;
+
 abstract class AbstractLicense implements LicenseInterface
 {
+    use PluginActive;
+
     protected const LICENSE_CONFIG_KEY = '';
     protected const PLUGIN_LICENSE_CONSTANT = '';
 

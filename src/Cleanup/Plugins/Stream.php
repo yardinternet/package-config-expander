@@ -10,11 +10,11 @@ class Stream extends BaseAbstract
 
     public function cleanup(): void
     {
-        if (! $this->pluginIsActive()) {
+        if (! $this->isPluginActive($this->plugin)) {
             return;
         }
 
-        if ($this->pluginIsNetworkActived()) {
+        if ($this->isPluginActiveForNetwork($this->plugin)) {
             $this->multiSite();
 
             return;

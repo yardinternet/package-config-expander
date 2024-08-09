@@ -19,7 +19,7 @@ class WpMigrateLicense extends AbstractLicense
             return;
         }
 
-        if (! is_plugin_active('wp-migrate-db-pro/wp-migrate-db-pro.php') || ! $this->pluginIsInstalled()) {
+        if (! $this->isPluginActive('wp-migrate-db-pro/wp-migrate-db-pro.php') || ! $this->pluginIsInstalled()) {
             return;
         }
 
