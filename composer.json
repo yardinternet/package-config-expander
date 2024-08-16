@@ -2,7 +2,7 @@
 	"name": "yard/config-expander",
 	"type": "package",
 	"description": "Adds necessary security, defaults and settings to this site.",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"license": "MIT",
 	"config": {
 		"allow-plugins": {
