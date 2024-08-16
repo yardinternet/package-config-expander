@@ -8,6 +8,23 @@ trait Route
 {
     public function route(string $path): string
     {
-        return config('app.url') . $path;
+        return $this->composeBaseURL() . $path;
+    }
+
+    /**
+     * Constructs the base URL of the main site, ensuring that subdirectories load
+     * their assets from the main site.
+     */
+    private function composeBaseURL(): string
+    {
+        $fullURL = home_url();
+        $components = parse_url($fullURL);
+        $baseURL = sprintf('%s://%s', $components['scheme'], $components['host']);
+
+        if (isset($components['port'])) {
+            $baseURL .= ':' . $components['port'];
+        }
+
+        return $baseURL;
     }
 }

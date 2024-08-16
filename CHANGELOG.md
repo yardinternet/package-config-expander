@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.0.3 - 2024-08-16
+
+- Change: methode route() inside Route trait, ensuring subdirectories load their assets from the main site
+
 ## v1.0.2 - 2024-08-16
 
 - Change: login protection validation only when URI contains '/wp-admin' and '/wp-login'
