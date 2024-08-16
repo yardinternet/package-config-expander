@@ -17,16 +17,11 @@ class Protect
 
     public function handleLogin(): void
     {
-        if (! $this->isLoginPage()) {
+        if (is_user_logged_in()) {
             return;
         }
 
         $this->authorizeAccess('login');
-    }
-
-    protected function isLoginPage(): bool
-    {
-        return strpos($_SERVER['PHP_SELF'] ?? '', 'wp-login.php') !== false;
     }
 
     protected function authorizeAccess(string $type): void
