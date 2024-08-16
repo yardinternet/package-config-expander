@@ -103,5 +103,8 @@ class DisableServiceProvider extends ServiceProvider
         if (($settings['DISABLE_EMOJICONS'] ?? true)) {
             DisableEmojicons::init();
         }
+
+        // Disable WordPress sitemaps to prevent user data from being publicly exposed.
+        add_filter('wp_sitemaps_enabled', '__return_false');
     }
 }
