@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v1.0.4 - 2024-08-26
+
+- Change: update admin labels
+- Change: updated dependencies
+
 ## v1.0.3 - 2024-08-16
 
 - Change: methode route() inside Route trait, ensuring subdirectories load their assets from the main site
