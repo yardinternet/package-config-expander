@@ -22,7 +22,7 @@ class ProtectionServiceProvider extends ServiceProvider
 
     private function initProtection(): void
     {
-        if (defined('WP_CLI') && WP_CLI) {
+        if (defined('WP_CLI') && WP_CLI || defined('WP_ENV') && WP_ENV === 'development') {
             return;
         }
 
