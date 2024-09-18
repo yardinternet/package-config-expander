@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v1.0.5 - 2024-09-18
+
+- Fix: call ACF methods on init action when validating protection types
+- Add: disable protection init when WP_ENV const is development
+
 ## v1.0.4 - 2024-08-26
 
 - Change: update admin labels
