@@ -28,7 +28,9 @@ class ProtectionServiceProvider extends ServiceProvider
 
         // First check admin pages and login page.
         if (strpos($_SERVER['REQUEST_URI'], '/wp-admin') !== false || strpos($_SERVER['REQUEST_URI'], '/wp-login') !== false) {
-            resolve('protect')->handleLogin();
+            add_action('init', function(){
+                resolve('protect')->handleLogin();
+            });
 
             return;
         }
