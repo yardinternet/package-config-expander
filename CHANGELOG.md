@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.0.6 - 2024-09-27
+
+- Fix: trailingslashit $path in Route trait
+
 ## v1.0.5 - 2024-09-18
 
 - Fix: call ACF methods on init action when validating protection types
