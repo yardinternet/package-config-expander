@@ -8,7 +8,7 @@ trait Route
 {
     public function route(string $path): string
     {
-        return $this->composeBaseURL() . $path;
+        return $this->composeBaseURL() . trailingslashit($path);
     }
 
     /**
