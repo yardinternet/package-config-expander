@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v1.0.8 - 2024-09-30
+
+- Change: protect website access when user is not logged in
+- Change: WpMigrateLicense retrieve Yard admin user
+
 ## v1.0.7 - 2024-09-30
 
 - Fix: use absolute paths instead of relative ones inside yard-y-icon.scss
