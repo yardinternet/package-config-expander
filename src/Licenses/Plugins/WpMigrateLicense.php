@@ -69,9 +69,9 @@ class WpMigrateLicense extends AbstractLicense
     protected function getYardAdminUser(): ?WP_User
     {
         $args = [
-            'search'         => '*@yard.nl*',
+            'search' => '*@yard.nl*',
             'search_columns' => ['user_email'],
-            'role'           => 'Administrator',
+            'role' => 'Administrator',
         ];
 
         $userQuery = new WP_User_Query($args);
