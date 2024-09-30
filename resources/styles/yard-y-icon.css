@@ -1,11 +1,15 @@
 @font-face {
 	font-family: 'yard y';
-	src: url( '../fonts/yard-y-icon.eot' );
+	src: url( '/yard/config-expander/resources/fonts/yard-y-icon.eot' );
 	src:
-		url( '../fonts/yard-y-icon.eot?#iefix' ) format( 'embedded-opentype' ),
-		url( '../fonts/yard-y-icon.woff' ) format( 'woff' ),
-		url( '../fonts/yard-y-icon.ttf' ) format( 'truetype' ),
-		url( '../fonts/yard-y-icon.svg#yard-y' ) format( 'svg' );
+		url( '/yard/config-expander/resources/fonts/yard-y-icon.eot?#iefix' )
+			format( 'embedded-opentype' ),
+		url( '/yard/config-expander/resources/fonts/yard-y-icon.woff' )
+			format( 'woff' ),
+		url( '/yard/config-expander/resources/fonts/yard-y-icon.ttf' )
+			format( 'truetype' ),
+		url( '/yard/config-expander/resources/fonts/yard-y-icon.svg#yard-y' )
+			format( 'svg' );
 	font-weight: normal;
 	font-style: normal;
 }
