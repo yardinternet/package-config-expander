@@ -22,13 +22,13 @@ class ProtectionServiceProvider extends ServiceProvider
 
     private function initProtection(): void
     {
-        if (defined('WP_CLI') && WP_CLI || defined('WP_ENV') && WP_ENV === 'development') {
+        if (! $this->shouldInitProtection()) {
             return;
         }
 
         // First check admin pages and login page.
         if (strpos($_SERVER['REQUEST_URI'], '/wp-admin') !== false || strpos($_SERVER['REQUEST_URI'], '/wp-login') !== false) {
-            add_action('init', function(){
+            add_action('init', function () {
                 resolve('protect')->handleLogin();
             });
 
@@ -37,5 +37,18 @@ class ProtectionServiceProvider extends ServiceProvider
 
         // @phpstan-ignore-next-line
         add_action('template_redirect', [resolve('protect'), 'handleSite'], 10, 0);
+    }
+
+    private function shouldInitProtection(): bool
+    {
+        if (defined('WP_CLI') && WP_CLI || (defined('WP_ENV') && WP_ENV === 'development')) {
+            return false;
+        }
+
+        if (is_user_logged_in()) {
+            return false;
+        }
+
+        return true;
     }
 }

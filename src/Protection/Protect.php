@@ -8,19 +8,11 @@ class Protect
 {
     public function handleSite(): void
     {
-        if (is_user_logged_in()) {
-            return;
-        }
-
         $this->authorizeAccess('site');
     }
 
     public function handleLogin(): void
     {
-        if (is_user_logged_in()) {
-            return;
-        }
-
         $this->authorizeAccess('login');
     }
 
@@ -97,7 +89,7 @@ class Protect
 
         $type = get_field('type_protection_website', 'options');
 
-        if (empty($type) || $type === 'none') {
+        if (empty($type) || 'none' === $type) {
             return [];
         }
 
