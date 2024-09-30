@@ -13,18 +13,18 @@ trait PluginActive
 {
     public function isPluginActive(string $plugin): bool
     {
-        return in_array( $plugin, (array) get_option( 'active_plugins', array() ), true ) || $this->isPluginActiveForNetwork( $plugin );
+        return in_array($plugin, (array) get_option('active_plugins', []), true) || $this->isPluginActiveForNetwork($plugin);
     }
 
-    public function isPluginActiveForNetwork( $plugin ): bool
+    public function isPluginActiveForNetwork($plugin): bool
     {
-        if ( ! is_multisite() ) {
+        if (! is_multisite()) {
             return false;
         }
 
-        $plugins = get_site_option( 'active_sitewide_plugins' );
+        $plugins = get_site_option('active_sitewide_plugins');
 
-        if ( isset( $plugins[ $plugin ] ) ) {
+        if (isset($plugins[ $plugin ])) {
             return true;
         }
 
