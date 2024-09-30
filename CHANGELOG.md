@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.0.7 - 2024-09-30
+
+- Fix: use absolute paths instead of relative ones inside yard-y-icon.scss
+
 ## v1.0.6 - 2024-09-27
 
 - Fix: trailingslashit $path in Route trait
