@@ -63,16 +63,29 @@ class WpMigrateLicense extends AbstractLicense
         update_user_meta($user->ID, 'wpmdb_licence_key', $this->getLicense());
     }
 
+    /**
+     * Tries to find the Yard admin user, when there is no match the first admin user is returned.
+     */
     protected function getYardAdminUser(): ?WP_User
     {
         $args = [
-            'search' => '*@yard.nl*',
+            'search'         => '*@yard.nl*',
             'search_columns' => ['user_email'],
-            'role' => 'Administrator',
+            'role'           => 'Administrator',
         ];
 
         $userQuery = new WP_User_Query($args);
+        $adminUser = $userQuery->results[0] ?? null;
 
-        return $userQuery->results[0] ?? null;
+        if (! $adminUser instanceof WP_User) {
+            $args = [
+                'role' => 'Administrator',
+            ];
+
+            $userQuery = new WP_User_Query($args);
+            $adminUser = $userQuery->results[0] ?? null;
+        }
+
+        return $adminUser instanceof WP_User ? $adminUser : null;
     }
 }
