@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v1.0.9 - 2024-10-08
+
+- Fix: yard-y-icon.css url paths
+- Chore: update deps
+
 ## v1.0.8 - 2024-09-30
 
 - Change: protect website access when user is not logged in
