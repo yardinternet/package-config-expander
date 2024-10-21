@@ -25,6 +25,9 @@ return [
         'Yard\ConfigExpander\LoginScreenCustomization\LoginScreenCustomizationServiceProvider' => [
             'enabled' => true,
         ],
+        'Yard\ConfigExpander\Mail\MailServiceProvider' => [
+            'enabled' => true,
+        ],
     ],
     'defaults' => [
         'admin' => [
