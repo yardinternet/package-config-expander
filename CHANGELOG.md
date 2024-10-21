@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v1.1.0 - 2024-10-21
+
+- Add: mail service provider to fix sender attribute
+- Chore: update deps
+
 ## v1.0.9 - 2024-10-08
 
 - Fix: yard-y-icon.css url paths
