@@ -24,23 +24,8 @@ class ACFServiceProvider extends ServiceProvider
             return;
         }
 
-        add_action('admin_enqueue_scripts', [$this, 'registerPluginIcon'], 10, 0);
         add_action('acf/init', [$this, 'init'], 10, 0);
         add_action('acf/include_fields', [$this, 'addLocalFieldGroup'], 10, 0);
-    }
-
-    /**
-     * Register plugin/package icon css which is used in the admin menu.
-     */
-    public function registerPluginIcon(): void
-    {
-        // Make sure the style is registered once.
-        if (wp_style_is('yard_y_plugin_icon', 'registered')) {
-            return;
-        }
-
-        wp_register_style('yard_y_plugin_icon', $this->route('/yard/config-expander/resources/styles/yard-y-icon'));
-        wp_enqueue_style('yard_y_plugin_icon');
     }
 
     public function init(): void
@@ -61,7 +46,6 @@ class ACFServiceProvider extends ServiceProvider
         }
 
         acf_add_options_page([
-            'icon_url' => 'dashicons-yard-y',
             'menu_slug' => 'acf-options-yard-config',
             'page_title' => 'Yard Config+',
             'parent_slug' => 'options-general.php',
