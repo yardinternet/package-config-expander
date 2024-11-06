@@ -61,10 +61,10 @@ class ACFServiceProvider extends ServiceProvider
         }
 
         acf_add_options_page([
-            'page_title' => 'Yard Config+',
             'icon_url' => 'dashicons-yard-y',
             'menu_slug' => 'acf-options-yard-config',
-            'position' => 65,
+            'page_title' => 'Yard Config+',
+            'parent_slug' => 'options-general.php',
         ]);
     }
 
