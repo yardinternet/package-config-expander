@@ -9,8 +9,6 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    reviewers:
-      - yardinternet/wordpress-backend
     groups:
       actions:
         patterns:
@@ -38,8 +36,6 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    reviewers:
-      - yardinternet/wordpress-backend
     groups:
       composer:
         patterns:
