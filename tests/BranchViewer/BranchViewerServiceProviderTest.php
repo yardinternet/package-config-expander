@@ -9,12 +9,12 @@ use WP_Admin_Bar;
 use Yard\ConfigExpander\BranchViewer\BranchViewerServiceProvider;
 
 beforeEach(function () {
-    $this->app->instance('path.public', __DIR__);
-    $this->validGitPath = __DIR__ . '/test_git/HEAD';
+	$this->app->instance('path.public', __DIR__);
+	$this->validGitPath = __DIR__ . '/test_git/HEAD';
 
-    if (! file_exists(dirname($this->validGitPath))) {
-        mkdir(dirname($this->validGitPath), 0777, true);
-    }
+	if (! file_exists(dirname($this->validGitPath))) {
+		mkdir(dirname($this->validGitPath), 0777, true);
+	}
 });
 
 /**
@@ -23,12 +23,12 @@ beforeEach(function () {
  * @preserveGlobalState disabled
  */
 test('addBranchViewer does nothing if user cannot manage options', function () {
-    setCurrentUserCanMock(false);
+	setCurrentUserCanMock(false);
 
-    $provider = new BranchViewerServiceProvider($this->app);
+	$provider = new BranchViewerServiceProvider($this->app);
 
-    $adminBar = Mockery::mock(WP_Admin_Bar::class);
-    $adminBar->shouldNotReceive('add_menu');
+	$adminBar = Mockery::mock(WP_Admin_Bar::class);
+	$adminBar->shouldNotReceive('add_menu');
 
-    $provider->addBranchViewer($adminBar);
+	$provider->addBranchViewer($adminBar);
 });

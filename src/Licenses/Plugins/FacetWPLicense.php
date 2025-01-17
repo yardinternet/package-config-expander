@@ -8,15 +8,15 @@ use Yard\ConfigExpander\Licenses\Contracts\AbstractLicense;
 
 class FacetWPLicense extends AbstractLicense
 {
-    protected const LICENSE_CONFIG_KEY = 'FACETWP_LICENSE_KEY';
-    protected const PLUGIN_LICENSE_CONSTANT = 'FACETWP_LICENSE_KEY';
+	protected const LICENSE_CONFIG_KEY = 'FACETWP_LICENSE_KEY';
+	protected const PLUGIN_LICENSE_CONSTANT = 'FACETWP_LICENSE_KEY';
 
-    public function register(): void
-    {
-        if (defined(self::PLUGIN_LICENSE_CONSTANT) || empty($this->getLicense())) {
-            return;
-        }
+	public function register(): void
+	{
+		if (defined(self::PLUGIN_LICENSE_CONSTANT) || empty($this->getLicense())) {
+			return;
+		}
 
-        define(self::PLUGIN_LICENSE_CONSTANT, $this->getLicense());
-    }
+		define(self::PLUGIN_LICENSE_CONSTANT, $this->getLicense());
+	}
 }

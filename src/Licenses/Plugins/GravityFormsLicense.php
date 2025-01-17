@@ -8,22 +8,22 @@ use Yard\ConfigExpander\Licenses\Contracts\AbstractLicense;
 
 class GravityFormsLicense extends AbstractLicense
 {
-    protected const LICENSE_CONFIG_KEY = 'GF_LICENSE_KEY';
+	protected const LICENSE_CONFIG_KEY = 'GF_LICENSE_KEY';
 
-    public function register(): void
-    {
-        if (empty($this->getLicense())) {
-            return;
-        }
+	public function register(): void
+	{
+		if (empty($this->getLicense())) {
+			return;
+		}
 
-        $licenseKey = get_option('rg_gforms_key');
+		$licenseKey = get_option('rg_gforms_key');
 
-        if (false !== $licenseKey) {
-            update_option('rg_gforms_key', $this->getLicense());
+		if (false !== $licenseKey) {
+			update_option('rg_gforms_key', $this->getLicense());
 
-            return;
-        }
+			return;
+		}
 
-        add_option('rg_gforms_key', $this->getLicense());
-    }
+		add_option('rg_gforms_key', $this->getLicense());
+	}
 }

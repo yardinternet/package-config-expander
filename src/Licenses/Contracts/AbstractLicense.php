@@ -8,28 +8,28 @@ use Yard\ConfigExpander\Traits\PluginActive;
 
 abstract class AbstractLicense implements LicenseInterface
 {
-    use PluginActive;
+	use PluginActive;
 
-    protected const LICENSE_CONFIG_KEY = '';
-    protected const PLUGIN_LICENSE_CONSTANT = '';
+	protected const LICENSE_CONFIG_KEY = '';
+	protected const PLUGIN_LICENSE_CONSTANT = '';
 
-    /**
-     * @var array<string, string>
-     */
-    protected array $licenses;
+	/**
+	 * @var array<string, string>
+	 */
+	protected array $licenses;
 
-    /**
-     * @param array<string, string> $licenses
-     */
-    public function __construct(array $licenses)
-    {
-        $this->licenses = $licenses;
-    }
+	/**
+	 * @param array<string, string> $licenses
+	 */
+	public function __construct(array $licenses)
+	{
+		$this->licenses = $licenses;
+	}
 
-    abstract public function register(): void;
+	abstract public function register(): void;
 
-    protected function getLicense(): string
-    {
-        return $this->licenses[static::LICENSE_CONFIG_KEY] ?? '';
-    }
+	protected function getLicense(): string
+	{
+		return $this->licenses[static::LICENSE_CONFIG_KEY] ?? '';
+	}
 }

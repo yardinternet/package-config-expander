@@ -8,9 +8,9 @@ use Yard\ConfigExpander\Traits\PluginActive;
 
 abstract class BaseAbstract
 {
-    use PluginActive;
+	use PluginActive;
 
-    protected string $plugin = '';
+	protected string $plugin = '';
 
-    abstract public function cleanup(): void;
+	abstract public function cleanup(): void;
 }

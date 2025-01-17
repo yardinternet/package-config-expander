@@ -13,9 +13,9 @@ use Illuminate\Support\ServiceProvider;
  */
 class MailServiceProvider extends ServiceProvider
 {
-    public function boot(): void
-    {
-        // Set Return-Path equal to MailFrom field.
-        add_action('phpmailer_init', fn ($phpmailer) => $phpmailer->Sender = $phpmailer->From);
-    }
+	public function boot(): void
+	{
+		// Set Return-Path equal to MailFrom field.
+		add_action('phpmailer_init', fn ($phpmailer) => $phpmailer->Sender = $phpmailer->From);
+	}
 }

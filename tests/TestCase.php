@@ -10,16 +10,16 @@ require_once __DIR__ . '/Setup.php';
 
 class TestCase extends Orchestra
 {
-    protected function getPackageProviders($app)
-    {
-        return [
-            // LaravelDataServiceProvider::class,
-        ];
-    }
+	protected function getPackageProviders($app)
+	{
+		return [
+			// LaravelDataServiceProvider::class,
+		];
+	}
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-        setCurrentUserCanMock(false); // Default value
-    }
+	protected function setUp(): void
+	{
+		parent::setUp();
+		setCurrentUserCanMock(false); // Default value
+	}
 }

@@ -14,26 +14,26 @@ use Yard\ConfigExpander\Licenses\Plugins\WpMigrateLicense;
 
 class LicensesServiceProvider extends ServiceProvider
 {
-    public function boot(): void
-    {
-        $this->setLicenses();
-    }
+	public function boot(): void
+	{
+		$this->setLicenses();
+	}
 
-    protected function setLicenses(): void
-    {
-        $licenses = resolve('config')->get('yard-config-expander.licenses', []);
+	protected function setLicenses(): void
+	{
+		$licenses = resolve('config')->get('yard-config-expander.licenses', []);
 
-        if (! is_array($licenses) || count($licenses) === 0) {
-            return;
-        }
+		if (! is_array($licenses) || count($licenses) === 0) {
+			return;
+		}
 
-        LicenseManager::make($licenses)->registerPlugins([
-            AdvancedCustomFieldsLicense::class,
-            GravityFormsLicense::class,
-            FacetWPLicense::class,
-            SearchWPLicense::class,
-            SeoPressLicense::class,
-            WpMigrateLicense::class,
-        ])->load();
-    }
+		LicenseManager::make($licenses)->registerPlugins([
+			AdvancedCustomFieldsLicense::class,
+			GravityFormsLicense::class,
+			FacetWPLicense::class,
+			SearchWPLicense::class,
+			SeoPressLicense::class,
+			WpMigrateLicense::class,
+		])->load();
+	}
 }
