@@ -8,47 +8,47 @@ use Illuminate\Support\ServiceProvider;
 
 class ProtectionServiceProvider extends ServiceProvider
 {
-    public function register(): void
-    {
-        $this->app->singleton('protect', function ($app) {
-            return new Protect();
-        });
-    }
+	public function register(): void
+	{
+		$this->app->singleton('protect', function ($app) {
+			return new Protect();
+		});
+	}
 
-    public function boot(): void
-    {
-        $this->initProtection();
-    }
+	public function boot(): void
+	{
+		$this->initProtection();
+	}
 
-    private function initProtection(): void
-    {
-        if (! $this->shouldInitProtection()) {
-            return;
-        }
+	private function initProtection(): void
+	{
+		if (! $this->shouldInitProtection()) {
+			return;
+		}
 
-        // First check admin pages and login page.
-        if (strpos($_SERVER['REQUEST_URI'], '/wp-admin') !== false || strpos($_SERVER['REQUEST_URI'], '/wp-login') !== false) {
-            add_action('init', function () {
-                resolve('protect')->handleLogin();
-            });
+		// First check admin pages and login page.
+		if (strpos($_SERVER['REQUEST_URI'], '/wp-admin') !== false || strpos($_SERVER['REQUEST_URI'], '/wp-login') !== false) {
+			add_action('init', function () {
+				resolve('protect')->handleLogin();
+			});
 
-            return;
-        }
+			return;
+		}
 
-        // @phpstan-ignore-next-line
-        add_action('template_redirect', [resolve('protect'), 'handleSite'], 10, 0);
-    }
+		// @phpstan-ignore-next-line
+		add_action('template_redirect', [resolve('protect'), 'handleSite'], 10, 0);
+	}
 
-    private function shouldInitProtection(): bool
-    {
-        if (defined('WP_CLI') && WP_CLI || (defined('WP_ENV') && WP_ENV === 'development')) {
-            return false;
-        }
+	private function shouldInitProtection(): bool
+	{
+		if (defined('WP_CLI') && WP_CLI || (defined('WP_ENV') && WP_ENV === 'development')) {
+			return false;
+		}
 
-        if (is_user_logged_in()) {
-            return false;
-        }
+		if (is_user_logged_in()) {
+			return false;
+		}
 
-        return true;
-    }
+		return true;
+	}
 }

@@ -6,48 +6,48 @@ namespace Yard\ConfigExpander\Protection;
 
 class WhitelistEntity
 {
-    /**
-     * @var array<string, string>
-     */
-    protected array $entity;
+	/**
+	 * @var array<string, string>
+	 */
+	protected array $entity;
 
-    /**
-     * @param array<string, string> $entity
-     */
-    public function __construct(array $entity)
-    {
-        $this->entity = $entity;
-    }
+	/**
+	 * @param array<string, string> $entity
+	 */
+	public function __construct(array $entity)
+	{
+		$this->entity = $entity;
+	}
 
-    public function type(): string
-    {
-        return $this->entity['type'] ?? '';
-    }
+	public function type(): string
+	{
+		return $this->entity['type'] ?? '';
+	}
 
-    /**
-     * @return string[]
-     */
-    public function types(): array
-    {
-        $type = $this->type();
+	/**
+	 * @return string[]
+	 */
+	public function types(): array
+	{
+		$type = $this->type();
 
-        if (empty($type)) {
-            return [];
-        }
+		if (empty($type)) {
+			return [];
+		}
 
-        return 'both' === $type ? ['login', 'site', 'both'] : [$type];
-    }
+		return 'both' === $type ? ['login', 'site', 'both'] : [$type];
+	}
 
-    public function ipAddress(): string
-    {
-        return $this->entity['whitelisted_ip_address'] ?? '';
-    }
+	public function ipAddress(): string
+	{
+		return $this->entity['whitelisted_ip_address'] ?? '';
+	}
 
-    /**
-     * Could be a person or an external system.
-     */
-    public function description(): string
-    {
-        return $this->entity['whitelisted_description'] ?? '';
-    }
+	/**
+	 * Could be a person or an external system.
+	 */
+	public function description(): string
+	{
+		return $this->entity['whitelisted_description'] ?? '';
+	}
 }

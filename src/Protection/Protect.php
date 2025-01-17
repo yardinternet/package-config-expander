@@ -6,114 +6,114 @@ namespace Yard\ConfigExpander\Protection;
 
 class Protect
 {
-    public function handleSite(): void
-    {
-        $this->authorizeAccess('site');
-    }
+	public function handleSite(): void
+	{
+		$this->authorizeAccess('site');
+	}
 
-    public function handleLogin(): void
-    {
-        $this->authorizeAccess('login');
-    }
+	public function handleLogin(): void
+	{
+		$this->authorizeAccess('login');
+	}
 
-    protected function authorizeAccess(string $type): void
-    {
-        if (! $this->checkIfVisitorHasAccess($type)) {
-            $this->denyAccess();
-        }
-    }
+	protected function authorizeAccess(string $type): void
+	{
+		if (! $this->checkIfVisitorHasAccess($type)) {
+			$this->denyAccess();
+		}
+	}
 
-    protected function checkIfVisitorHasAccess(string $type): bool
-    {
-        if (! in_array($type, $this->getProtectionTypesWebsite())) {
-            return true;
-        }
+	protected function checkIfVisitorHasAccess(string $type): bool
+	{
+		if (! in_array($type, $this->getProtectionTypesWebsite())) {
+			return true;
+		}
 
-        foreach ($this->getWhitelistedEntities() as $whitelistEntity) {
-            if (! $this->intersectsWithProtectedTypesWebsite($whitelistEntity)) {
-                continue;
-            }
+		foreach ($this->getWhitelistedEntities() as $whitelistEntity) {
+			if (! $this->intersectsWithProtectedTypesWebsite($whitelistEntity)) {
+				continue;
+			}
 
-            if (! $this->currentProtectionTypeMatchesWhitelist($type, $whitelistEntity)) {
-                continue;
-            }
+			if (! $this->currentProtectionTypeMatchesWhitelist($type, $whitelistEntity)) {
+				continue;
+			}
 
-            if ($this->ipCurrentVisitor() !== $whitelistEntity->ipAddress()) {
-                continue;
-            }
+			if ($this->ipCurrentVisitor() !== $whitelistEntity->ipAddress()) {
+				continue;
+			}
 
-            return true;
-        }
+			return true;
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    /**
-     * Validate if the whitelisted entity types intersect with the protection types of the website.
-     * Without an intersection the visitor should be denied access.
-     */
-    protected function intersectsWithProtectedTypesWebsite(WhitelistEntity $whitelistEntity): bool
-    {
-        return ! empty(array_intersect($whitelistEntity->types(), $this->getProtectionTypesWebsite()));
-    }
+	/**
+	 * Validate if the whitelisted entity types intersect with the protection types of the website.
+	 * Without an intersection the visitor should be denied access.
+	 */
+	protected function intersectsWithProtectedTypesWebsite(WhitelistEntity $whitelistEntity): bool
+	{
+		return ! empty(array_intersect($whitelistEntity->types(), $this->getProtectionTypesWebsite()));
+	}
 
-    /**
-     * The type which is validated should match one of the whitelisted entity protection types.
-     */
-    protected function currentProtectionTypeMatchesWhitelist(string $type, WhitelistEntity $whitelistEntity): bool
-    {
-        return in_array($type, $whitelistEntity->types());
-    }
+	/**
+	 * The type which is validated should match one of the whitelisted entity protection types.
+	 */
+	protected function currentProtectionTypeMatchesWhitelist(string $type, WhitelistEntity $whitelistEntity): bool
+	{
+		return in_array($type, $whitelistEntity->types());
+	}
 
-    protected function denyAccess(): void
-    {
-        header('HTTP/1.0 401 Unauthorized');
-        // @phpstan-ignore-next-line
-        echo __('You\'re not allowed to view this page.', 'config-expander');
-        exit;
-    }
+	protected function denyAccess(): void
+	{
+		header('HTTP/1.0 401 Unauthorized');
+		// @phpstan-ignore-next-line
+		echo __('You\'re not allowed to view this page.', 'config-expander');
+		exit;
+	}
 
-    protected function ipCurrentVisitor(): string
-    {
-        return $_SERVER['REMOTE_ADDR'] ?? '';
-    }
+	protected function ipCurrentVisitor(): string
+	{
+		return $_SERVER['REMOTE_ADDR'] ?? '';
+	}
 
-    /**
-     * @return string[]
-     */
-    protected function getProtectionTypesWebsite(): array
-    {
-        if (! function_exists('get_field')) {
-            return [];
-        }
+	/**
+	 * @return string[]
+	 */
+	protected function getProtectionTypesWebsite(): array
+	{
+		if (! function_exists('get_field')) {
+			return [];
+		}
 
-        $type = get_field('type_protection_website', 'options');
+		$type = get_field('type_protection_website', 'options');
 
-        if (empty($type) || 'none' === $type) {
-            return [];
-        }
+		if (empty($type) || 'none' === $type) {
+			return [];
+		}
 
-        return 'both' === $type ? ['login', 'site', 'both'] : [$type];
-    }
+		return 'both' === $type ? ['login', 'site', 'both'] : [$type];
+	}
 
-    /**
-     * @return WhitelistEntity[]
-     */
-    protected function getWhitelistedEntities(): array
-    {
-        // @phpstan-ignore-next-line
-        $field = get_field('ip_whistelisting', 'options');
+	/**
+	 * @return WhitelistEntity[]
+	 */
+	protected function getWhitelistedEntities(): array
+	{
+		// @phpstan-ignore-next-line
+		$field = get_field('ip_whistelisting', 'options');
 
-        if (! is_array($field) || empty($field)) {
-            return [];
-        }
+		if (! is_array($field) || empty($field)) {
+			return [];
+		}
 
-        $group = $field['ip_whistelisting_group'] ?? [];
+		$group = $field['ip_whistelisting_group'] ?? [];
 
-        if (! is_array($group) || empty($group)) {
-            return [];
-        }
+		if (! is_array($group) || empty($group)) {
+			return [];
+		}
 
-        return array_map(fn ($entity) => new WhitelistEntity($entity), $group);
-    }
+		return array_map(fn ($entity) => new WhitelistEntity($entity), $group);
+	}
 }
