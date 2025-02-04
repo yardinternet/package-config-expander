@@ -23,11 +23,22 @@ class Protect
 		}
 	}
 
+	/**
+	 * Set a custom header which can be used by proxy servers to omit caching.
+	 * This is because if IP blocking is enabled there are multiple versions of the same page: 403 and 200 for instance.
+	 */
+	protected function setNoCacheHeader(): void
+	{
+		header('Yard-No-Cache: true');
+	}
+
 	protected function checkIfVisitorHasAccess(string $type): bool
 	{
 		if (! in_array($type, $this->getProtectionTypesWebsite())) {
 			return true;
 		}
+
+		$this->setNoCacheHeader();
 
 		foreach ($this->getWhitelistedEntities() as $whitelistEntity) {
 			if (! $this->intersectsWithProtectedTypesWebsite($whitelistEntity)) {

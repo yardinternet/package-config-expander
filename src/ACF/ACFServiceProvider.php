@@ -26,6 +26,7 @@ class ACFServiceProvider extends ServiceProvider
 
 		add_action('acf/init', [$this, 'init'], 10, 0);
 		add_action('acf/include_fields', [$this, 'addLocalFieldGroup'], 10, 0);
+		add_action('acf/save_post', [$this, 'doActionOptionsUpdated'], 20);
 	}
 
 	public function init(): void
@@ -50,6 +51,18 @@ class ACFServiceProvider extends ServiceProvider
 			'page_title' => 'Yard Config+',
 			'parent_slug' => 'options-general.php',
 		]);
+	}
+
+	/**
+	 * Call action when config options are updated.
+	 */
+	public function doActionOptionsUpdated(): void
+	{
+		$screen = get_current_screen();
+
+		if (! empty($screen->id) && str_contains($screen->id, 'acf-options-yard-config')) {
+			do_action('config_expander_options_updated');
+		}
 	}
 
 	public function addLocalFieldGroup(): void

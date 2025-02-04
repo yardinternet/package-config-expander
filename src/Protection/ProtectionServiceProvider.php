@@ -13,11 +13,16 @@ class ProtectionServiceProvider extends ServiceProvider
 		$this->app->singleton('protect', function ($app) {
 			return new Protect();
 		});
+
+		$this->app->singleton('varnish-purge', function ($app) {
+			return new VarnishPurge();
+		});
 	}
 
 	public function boot(): void
 	{
 		$this->initProtection();
+		$this->addVarnishPurgeFilters();
 	}
 
 	private function initProtection(): void
@@ -37,6 +42,24 @@ class ProtectionServiceProvider extends ServiceProvider
 
 		// @phpstan-ignore-next-line
 		add_action('template_redirect', [resolve('protect'), 'handleSite'], 10, 0);
+	}
+
+	/**
+	 * Add custom purge event.
+	 */
+	public function addVarnishPurgeEvent(array $actions): array
+	{
+		$extra = [
+			'config_expander_flush_varnish',
+		];
+
+		return array_merge($actions, $extra);
+	}
+
+	private function addVarnishPurgeFilters(): void
+	{
+		add_filter('varnish_http_purge_events', [$this, 'addVarnishPurgeEvent']);
+		add_filter('varnish_http_purge_events_full', [$this, 'addVarnishPurgeEvent']);
 	}
 
 	private function shouldInitProtection(): bool
