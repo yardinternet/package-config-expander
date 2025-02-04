@@ -19,8 +19,8 @@ class ProtectionServiceProvider extends ServiceProvider
 	{
 		$this->initProtection();
 
-        add_filter('varnish_http_purge_events', [$this, 'addCustomPurgeEvent']);
-        add_filter('varnish_http_purge_events_full', [$this, 'addCustomPurgeEvent']);
+		add_filter('varnish_http_purge_events', [$this, 'addCustomPurgeEvent']);
+		add_filter('varnish_http_purge_events_full', [$this, 'addCustomPurgeEvent']);
 	}
 
 	private function initProtection(): void
