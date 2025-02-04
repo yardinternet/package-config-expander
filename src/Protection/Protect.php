@@ -25,7 +25,7 @@ class Protect
 
 	/**
 	 * Set a custom header which can be used by proxy servers to omit caching.
-	 * This is because if IP blocking is enabled there are multiple versions of the same page: 403 and 200 for instance.
+	 * This is because if IP blocking is enabled there can be multiple versions of the same page: 403 and 200 for instance.
 	 */
 	protected function setNoCacheHeader(): void
 	{
