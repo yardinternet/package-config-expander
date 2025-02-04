@@ -13,16 +13,14 @@ class ProtectionServiceProvider extends ServiceProvider
 		$this->app->singleton('protect', function ($app) {
 			return new Protect();
 		});
-
-		$this->app->singleton('varnish-purge', function ($app) {
-			return new VarnishPurge();
-		});
 	}
 
 	public function boot(): void
 	{
 		$this->initProtection();
-		$this->addVarnishPurgeFilters();
+
+        add_filter('varnish_http_purge_events', [$this, 'addVarnishPurgeEvent']);
+        add_filter('varnish_http_purge_events_full', [$this, 'addVarnishPurgeEvent']);
 	}
 
 	private function initProtection(): void
@@ -46,6 +44,10 @@ class ProtectionServiceProvider extends ServiceProvider
 
 	/**
 	 * Add custom purge event.
+	 *
+	 * @param string[] $actions
+	 *
+	 * @return string[]
 	 */
 	public function addVarnishPurgeEvent(array $actions): array
 	{
@@ -54,12 +56,6 @@ class ProtectionServiceProvider extends ServiceProvider
 		];
 
 		return array_merge($actions, $extra);
-	}
-
-	private function addVarnishPurgeFilters(): void
-	{
-		add_filter('varnish_http_purge_events', [$this, 'addVarnishPurgeEvent']);
-		add_filter('varnish_http_purge_events_full', [$this, 'addVarnishPurgeEvent']);
 	}
 
 	private function shouldInitProtection(): bool
