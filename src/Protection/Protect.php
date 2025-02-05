@@ -29,7 +29,7 @@ class Protect
 	 */
 	protected function setNoCacheHeader(): void
 	{
-		header('Yard-No-Cache: true');
+		header('Cache-Control: no-cache');
 	}
 
 	protected function checkIfVisitorHasAccess(string $type): bool
