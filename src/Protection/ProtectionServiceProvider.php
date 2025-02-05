@@ -52,7 +52,7 @@ class ProtectionServiceProvider extends ServiceProvider
 	public function addCustomPurgeEvent(array $actions): array
 	{
 		$extra = [
-			'config_expander_options_updated',
+			'yard::config-expander/acf/settings-updated',
 		];
 
 		return array_merge($actions, $extra);

@@ -61,7 +61,7 @@ class ACFServiceProvider extends ServiceProvider
 		$screen = get_current_screen();
 
 		if (! empty($screen->id) && str_contains($screen->id, 'acf-options-yard-config')) {
-			do_action('config_expander_options_updated');
+			do_action('yard::config-expander/acf/settings-updated');
 		}
 	}
 
