@@ -18,6 +18,9 @@ class ProtectionServiceProvider extends ServiceProvider
 	public function boot(): void
 	{
 		$this->initProtection();
+
+		add_filter('varnish_http_purge_events', [$this, 'addCustomPurgeEvent']);
+		add_filter('varnish_http_purge_events_full', [$this, 'addCustomPurgeEvent']);
 	}
 
 	private function initProtection(): void
@@ -37,6 +40,22 @@ class ProtectionServiceProvider extends ServiceProvider
 
 		// @phpstan-ignore-next-line
 		add_action('template_redirect', [resolve('protect'), 'handleSite'], 10, 0);
+	}
+
+	/**
+	 * Add custom purge event.
+	 *
+	 * @param string[] $actions
+	 *
+	 * @return string[]
+	 */
+	public function addCustomPurgeEvent(array $actions): array
+	{
+		$extra = [
+			'yard::config-expander/acf/settings-updated',
+		];
+
+		return array_merge($actions, $extra);
 	}
 
 	private function shouldInitProtection(): bool
