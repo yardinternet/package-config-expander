@@ -1,14 +1,21 @@
 # CHANGELOG
 
+## v1.2.0 - 2025-02-17
+
+- Add: add no cache header and purge varnish
+- Add: yard-php-cs-fixer rules
+- Change: improve GH actions
+- Change: update deps
+
 ## v1.1.0 - 2024-10-21
 
 - Add: mail service provider to fix sender attribute
-- Chore: update deps
+- Change: update deps
 
 ## v1.0.9 - 2024-10-08
 
 - Fix: yard-y-icon.css url paths
-- Chore: update deps
+- Change: update deps
 
 ## v1.0.8 - 2024-09-30
 
