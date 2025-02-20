@@ -58,8 +58,23 @@ class BranchViewer
 			throw new LogicException('No branchname found');
 		}
 
+		if ($commit = $this->handlePossibleCommit($branch)) {
+			return $commit;
+		}
+
 		$branchName = explode('/', $branch, 3);
 
-		return $branchName[2];
+		return $branchName[2] ?? $branchName[0];
+	}
+
+	private function handlePossibleCommit(string $branch): string
+	{
+		// 'ref' indicates that the branch is not a commit.
+		if (strpos($branch, 'ref') !== false) {
+			return '';
+		}
+
+		// Return the first 7 characters of the commit hash.
+		return sprintf('%s (commit)', substr($branch, 0, 7));
 	}
 }
