@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.2.1 - 2025-02-20
+
+- Fix: extract branch name when it is actually a commit
+
 ## v1.2.0 - 2025-02-17
 
 - Add: add no cache header and purge varnish
