@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Yard\ConfigExpander\Disable;
 
-use WP_Rewrite;
-
 class DisableFeed
 {
 	/**
