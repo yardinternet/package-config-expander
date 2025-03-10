@@ -35,9 +35,6 @@ class DisableFeed
 		// Remove feed links from the header
 		add_action('wp_loaded', [__CLASS__, 'removeUnusedLinksFromHeader'], 1, 1);
 
-		// Redirect all feeds to homepage
-		add_action('template_redirect', [__CLASS__, 'filterIfNotFeed'], 1, 1);
-
 		// Set pingback URI to blank for blog info
 		add_filter('bloginfo_url', [__CLASS__, 'setPingbackUrlToBlank'], 1, 2);
 		add_filter('bloginfo', [__CLASS__, 'setPingbackUrlToBlank'], 1, 2);
@@ -68,57 +65,6 @@ class DisableFeed
 			if (0 === strpos($link, $home)) {
 				unset($links[ $l ]);
 			}
-		}
-	}
-
-	/**
-	 * If the query is not a feed or 404 page, return.
-	 */
-	public static function filterIfNotFeed(): void
-	{
-		if (! \is_feed() || \is_404()) {
-			return;
-		}
-		// Call function to redirect feeds
-		self::redirectFeeds();
-	}
-
-	/**
-	 * Redirect feeds to their appropiate destination.
-	 */
-	private static function redirectFeeds(): void
-	{
-		// If the query contains `feed`, remove it from URL and redirect.
-		if (isset($_GET['feed'])) {
-			wp_safe_redirect(esc_url_raw(remove_query_arg('feed')), 301);
-			exit;
-		}
-
-		// Ensure 'feed' query var is empty if not 'old'
-		if ('old' !== get_query_var('feed')) {
-			set_query_var('feed', '');
-		}
-
-		// Automatically redirect feed links to the proper URL.
-		redirect_canonical();
-
-		/** @var WP_Rewrite $wpRewrite */
-		global $wpRewrite;
-
-		// Build the feed URL structure for redirection
-		$urlStruct = is_singular() ? '' : $wpRewrite->get_comment_feed_permastruct();
-		$urlStruct = preg_quote($urlStruct ?: '', '//');
-		$urlStruct = str_replace('%feed%', '(\w+)?', $urlStruct);
-		$urlStruct = preg_replace('#//+/#', '/', $urlStruct);
-
-		// Determine current and new URLs
-		$urlCurrent = (is_ssl() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-		$urlNew = preg_replace('#/' . $urlStruct . '/?$/#', '', $urlCurrent) ?? '';
-
-		// Redirect if URLs differ
-		if ($urlNew !== $urlCurrent) {
-			wp_safe_redirect($urlNew, 301);
-			exit;
 		}
 	}
 
