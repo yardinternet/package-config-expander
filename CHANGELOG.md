@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.2.2 - 2025-03-12
+
+- Fix: broken feed template redirect
+
 ## v1.2.1 - 2025-02-20
 
 - Fix: extract branch name when it is actually a commit
