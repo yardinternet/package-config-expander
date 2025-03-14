@@ -39,6 +39,7 @@ return [
 			'DISABLE_ADMIN_NOTICES_FOR_NON_ADMINS' => true,
 			'UNSET_ADMIN_ROLE_FOR_NON_ADMINS' => true,
 			'WP_CACHE' => false,
+			'ADMIN_EMAIL_CHECK_INTERVAL' => 0,
 		],
 		'api' => [
 			'DISABLE_REST_API_USERS' => true,
