@@ -9,8 +9,12 @@ class EnqueuedScriptsStyles
 	/**
 	 * Remove WordPress version from enqueued scripts and styles.
 	 */
-	public function removeWordPressVersion(string $src, string $handle): string
+	public function removeWordPressVersion(mixed $src, string $handle): string
 	{
+		if (! is_string($src)) {
+			return '';
+		}
+
 		if (strpos($src, 'ver=' . get_bloginfo('version'))) {
 			$src = remove_query_arg('ver', $src);
 		}
