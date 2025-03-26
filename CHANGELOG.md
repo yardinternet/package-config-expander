@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.2.3 - 2025-03-26
+
+- Fix: TypeError in removeWordPressVersion()
+
 ## v1.2.2 - 2025-03-12
 
 - Fix: broken feed template redirect
