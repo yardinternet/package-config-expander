@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v1.2.4 - 2025-04-23
+
+- Change: remove unsetting of endpoint '/wp/v2/users/me', WP handles authentication by default
+- Feat: disable admin email check
+
 ## v1.2.3 - 2025-03-26
 
 - Fix: TypeError in removeWordPressVersion()
