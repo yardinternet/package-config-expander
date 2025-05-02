@@ -1,4 +1,8 @@
 # CHANGELOG
+ 
+## v1.2.6 - 2025-05-02
+
+- Fix: emoji scripts and styles not removed in admin
 
 ## v1.2.5 - 2025-05-02
 
