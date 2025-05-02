@@ -184,6 +184,12 @@ class DisablePosts
 	 */
 	public static function restore_rss_feed(): void
 	{
+		$settings = resolve('config')->get('yard-config-expander.defaults.public', []);
+
+		if (false === ($settings['FEEDS_ENABLED'] ?? false)) {
+			return;
+		}
+
 		echo '<link rel="alternate" type="application/rss+xml" title="' . get_bloginfo('sitename') . ' &raquo; Feed" href="' . get_bloginfo('rss2_url') . '">' . "\n";
 	}
 
