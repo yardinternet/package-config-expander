@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.2.5 - 2025-05-02
+
+- Change: restore main RSS feed only when setting is set to true
+
 ## v1.2.4 - 2025-04-23
 
 - Change: remove unsetting of endpoint '/wp/v2/users/me', WP handles authentication by default
