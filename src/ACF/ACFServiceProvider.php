@@ -58,6 +58,10 @@ class ACFServiceProvider extends ServiceProvider
 	 */
 	public function doActionOptionsUpdated(): void
 	{
+		if (! function_exists('get_current_screen')) {
+			return;
+		}
+
 		$screen = get_current_screen();
 
 		if (! empty($screen->id) && str_contains($screen->id, 'acf-options-yard-config')) {
