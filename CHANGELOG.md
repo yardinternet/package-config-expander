@@ -1,5 +1,9 @@
 # CHANGELOG
- 
+
+## v1.2.7 - 2025-05-09
+
+- Fix: current screen is not available outside admin context
+
 ## v1.2.6 - 2025-05-02
 
 - Fix: emoji scripts and styles not removed in admin
