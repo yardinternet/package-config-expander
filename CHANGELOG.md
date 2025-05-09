@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.2.8 - 2025-05-09
+
+- Fix: remove emoji detection script from embeds
+
 ## v1.2.7 - 2025-05-09
 
 - Fix: current screen is not available outside admin context
