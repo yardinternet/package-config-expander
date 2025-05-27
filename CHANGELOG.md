@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.2.9 - 2025-0527
+
+- Fix: enable protection only on accept
+
 ## v1.2.8 - 2025-05-09
 
 - Fix: remove emoji detection script from embeds
