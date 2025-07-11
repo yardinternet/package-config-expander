@@ -15,7 +15,13 @@ class MailServiceProvider extends ServiceProvider
 {
 	public function boot(): void
 	{
-		// Set Return-Path equal to MailFrom field.
-		add_action('phpmailer_init', fn ($phpmailer) => $phpmailer->Sender = $phpmailer->From);
+		/**
+		 * Align the Return-Path with the From address to improve deliverability,
+		 * and set the hostname for consistent Message-ID generation (per site in multisite).
+		 */
+		add_action('phpmailer_init', function ($phpmailer) {
+			$phpmailer->Sender = $phpmailer->From;
+			$phpmailer->Hostname = preg_replace('/^www\./', '', parse_url(site_url(), PHP_URL_HOST));
+		});
 	}
 }
