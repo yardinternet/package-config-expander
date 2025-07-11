@@ -186,6 +186,10 @@ class DisablePosts
 	{
 		$settings = resolve('config')->get('yard-config-expander.defaults.public', []);
 
+		if (! is_array($settings)) {
+			return;
+		}
+
 		if (false === ($settings['FEEDS_ENABLED'] ?? false)) {
 			return;
 		}

@@ -21,7 +21,11 @@ class MailServiceProvider extends ServiceProvider
 		 */
 		add_action('phpmailer_init', function ($phpmailer) {
 			$phpmailer->Sender = $phpmailer->From;
-			$phpmailer->Hostname = preg_replace('/^www\./', '', parse_url(site_url(), PHP_URL_HOST));
+			$hostName = parse_url(site_url(), PHP_URL_HOST);
+
+			if (is_string($hostName) && 0 < strlen($hostName)) {
+				$phpmailer->Hostname = preg_replace('/^www\./', '', $hostName);
+			}
 		});
 	}
 }
