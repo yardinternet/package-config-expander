@@ -1,6 +1,11 @@
 # CHANGELOG
 
-## v1.2.9 - 2025-0527
+## v1.2.10 - 2025-07-21
+
+- Fix: PHPStan issues
+- Fix: phpmailer properties (hostname)
+
+## v1.2.9 - 2025-05-27
 
 - Fix: enable protection only on accept
 
