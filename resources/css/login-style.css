@@ -16,6 +16,10 @@ body.login {
 	margin-top: 0;
 }
 
+#loginform #wfls-prompt-overlay {
+	background: #21252a;
+}
+
 .login-action-login #loginform label,
 .login-action-lostpassword #lostpasswordform label {
 	color: #fff;
