@@ -18,6 +18,15 @@ body.login {
 
 #loginform #wfls-prompt-overlay {
 	background: #21252a;
+	align-items: flex-start;
+}
+
+#wfls-token-submit {
+	background: #37aecc;
+}
+
+.wfls-tooltip-trigger {
+	color:#37aecc;
 }
 
 .login-action-login #loginform label,
