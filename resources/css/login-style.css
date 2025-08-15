@@ -1,55 +1,65 @@
+:root {
+ --wp-login-color-bg-main: #f1f1f1;
+ --wp-login-color-bg-form: #21252a;
+ --wp-login-color-accent: #37aecc;
+ --wp-login-color-text-light: #fff;
+ --wp-login-color-text-dark: #21252a;
+}
+
 body.login {
-	background: #f1f1f1;
+ background: var(--wp-login-color-bg-main);
 }
 
-.login h1 a {
-	background: none;
-	background-repeat: no-repeat !important;
-	background-position: center center !important;
-	width: 100%;
+/* Login wrapper */
+#login {
+ h1 a {
+  width: 100%;
+  background: none;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+ }
+
+ .message,
+ .success {
+   border-color: var(--wp-login-color-accent);
 }
 
-.login-action-login #loginform,
-.login-action-lostpassword #lostpasswordform {
-	background: #21252a;
-	border: none;
-	margin-top: 0;
+ #loginform, #lostpasswordform  {
+  border: none;
+  margin-top: 0;
+  background: var(--wp-login-color-bg-form);
+
+  label {
+   color: var(--wp-login-color-text-light);
+  }
+
+  #wp-submit {
+   background: var(--wp-login-color-accent);
+  }
+
+  input[type='text']:focus,
+  input[type='password']:focus {
+   border-color: var(--wp-login-color-accent);
+  }
+ }
+
+ #nav a,
+ #backtoblog a {
+  color: var(--wp-login-color-text-dark);
+  font-weight: bold;
+ }
 }
 
-#loginform #wfls-prompt-overlay {
-	background: #21252a;
-	align-items: flex-start;
-}
+/* Wordfence 2fa prompt */
+#wfls-prompt-overlay {
+ align-items: flex-start;
+ background: var(--wp-login-color-bg-form);
 
-#wfls-token-submit {
-	background: #37aecc;
-}
+ .wfls-tooltip-trigger {
+  color: var(--wp-login-color-accent);
+ }
 
-.wfls-tooltip-trigger {
-	color:#37aecc;
-}
-
-.login-action-login #loginform label,
-.login-action-lostpassword #lostpasswordform label {
-	color: #fff;
-}
-
-#wp-submit {
-	background: #37aecc;
-}
-
-.login .message,
-.login .success {
-	border-color: #37aecc;
-}
-
-#login #nav a,
-#login #backtoblog a {
-	color: #21252a;
-	font-weight: bold;
-}
-
-.login input[type='text']:focus,
-.login input[type='password']:focus {
-	border-color: #37aecc;
+ #wfls-token-submit {
+  background: var(--wp-login-color-accent);
+ }
 }
