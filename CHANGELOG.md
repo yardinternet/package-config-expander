@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.2.11 - 2025-08-15
+
+- Fix: styling for WordFence 2FA
+
 ## v1.2.10 - 2025-07-21
 
 - Fix: PHPStan issues
