@@ -29,6 +29,7 @@ class ConfigExpanderServiceProvider extends ServiceProvider
 
 		$this->callServiceProviders('boot');
 		$this->loadRoutesFrom(__DIR__ . '/routes/web.php');
+		$this->loadViewsFrom(__DIR__ . '/../resources/views', 'yard-config-expander');
 	}
 
 	private function callServiceProviders(string $method = ''): void
@@ -39,18 +40,18 @@ class ConfigExpanderServiceProvider extends ServiceProvider
 
 		$providers = resolve('config')->get('yard-config-expander.providers', []);
 
-		if (! is_array($providers)) {
+		if (!is_array($providers)) {
 			return;
 		}
 
 		foreach ($providers as $provider => $args) {
-			if (! class_exists($provider) || ! ($args['enabled'] ?? false)) {
+			if (!class_exists($provider) || !($args['enabled'] ?? false)) {
 				continue;
 			}
 
 			$class = new $provider($this->app);
 
-			if (! is_object($class)) {
+			if (!is_object($class)) {
 				continue;
 			}
 

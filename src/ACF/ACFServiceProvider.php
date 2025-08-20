@@ -18,7 +18,13 @@ class ACFServiceProvider extends ServiceProvider
 		if (! $this->isPluginActive('advanced-custom-fields-pro/acf.php')) {
 			add_action('admin_notices', function () {
 				// @phpstan-ignore-next-line
-				echo sprintf('<div class="notice notice-error"><p><strong>Yard Digital: </strong>%s</p></div>', __('The required plugin for the Config Expander package <strong>Advanced Custom Fields PRO</strong> is not active. Please install and activate it.', 'config-expander'));
+				echo sprintf(
+					'<div class="notice notice-error"><p><strong>Yard Digital: </strong>%s</p></div>',
+					__(
+						'The required plugin for the Config Expander package <strong>Advanced Custom Fields PRO</strong> is not active. Please install and activate it.',
+						'config-expander'
+					)
+				);
 			});
 
 			return;
@@ -236,6 +242,54 @@ class ACFServiceProvider extends ServiceProvider
 							],
 						],
 					],
+				],
+				[
+					'key' => 'field_66696647125b',
+					'label' => 'Under construction mode',
+					'name' => 'under_construction_mode',
+					'aria-label' => '',
+					'type' => 'true_false',
+					'instructions' => 'Zet aan om een under construction pagina te selecteren voor bezoekers',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => [
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					],
+					'message' => '',
+					'default_value' => 0,
+					'ui' => 1,
+					'ui_on_text' => 'On',
+					'ui_off_text' => 'Off',
+				],
+				[
+					'key' => 'field_66696647125c',
+					'label' => 'Under construction pagina',
+					'name' => 'under_construction_page',
+					'aria-label' => '',
+					'type' => 'select',
+					'instructions' => 'Selecteer pagina om te tonen',
+					'required' => 0,
+					'conditional_logic' => [
+						[
+							[
+								'field' => 'field_66696647125b',
+								'operator' => '==',
+								'value' => '1',
+							],
+						],
+					],
+					'wrapper' => [
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					],
+					'choices' => array_reduce(get_pages(), function ($choices, $page) {
+						$choices[$page->ID] = $page->post_title;
+
+						return $choices;
+					}),
 				],
 			],
 			'location' => [

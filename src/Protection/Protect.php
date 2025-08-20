@@ -18,9 +18,14 @@ class Protect
 
 	protected function authorizeAccess(string $type): void
 	{
-		if (! $this->checkIfVisitorHasAccess($type)) {
-			$this->denyAccess();
+		if ($this->checkIfVisitorHasAccess($type)) {
+			return;
 		}
+
+		if ($this->underConstructionEnabled()) {
+			$this->getUnderConstructionPage();
+		}
+		$this->denyAccess();
 	}
 
 	/**
@@ -126,5 +131,36 @@ class Protect
 		}
 
 		return array_map(fn ($entity) => new WhitelistEntity($entity), $group);
+	}
+
+	protected function underConstructionEnabled(): bool
+	{
+		if (! function_exists('get_field')) {
+			return false;
+		}
+
+		if (get_field('under_construction_mode', 'options')) {
+			return true;
+		}
+
+		return false;
+	}
+
+	protected function getUnderConstructionPage(): void
+	{
+		if (! function_exists('get_field')) {
+			return;
+		}
+
+		$pageId = get_field('under_construction_page', 'options');
+
+		$post = get_post($pageId);
+
+		echo view('yard-config-expander::under-construction-page', [
+			'title' => $post->post_title,
+			'content' => $post->post_content,
+		]);
+
+		exit;
 	}
 }
