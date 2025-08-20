@@ -135,15 +135,7 @@ class Protect
 
 	protected function underConstructionEnabled(): bool
 	{
-		if (! function_exists('get_field')) {
-			return false;
-		}
-
-		if (get_field('under_construction_mode', 'options')) {
-			return true;
-		}
-
-		return false;
+		return function_exists('get_field') && (bool) get_field('under_construction_mode', 'options');
 	}
 
 	protected function getUnderConstructionPage(): void
@@ -155,6 +147,10 @@ class Protect
 		$pageId = get_field('under_construction_page', 'options');
 
 		$post = get_post($pageId);
+
+		if (! $post) {
+			return;
+		}
 
 		echo view('yard-config-expander::under-construction-page', [
 			'title' => $post->post_title,
