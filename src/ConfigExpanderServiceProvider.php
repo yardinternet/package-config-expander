@@ -40,18 +40,18 @@ class ConfigExpanderServiceProvider extends ServiceProvider
 
 		$providers = resolve('config')->get('yard-config-expander.providers', []);
 
-		if (!is_array($providers)) {
+		if (! is_array($providers)) {
 			return;
 		}
 
 		foreach ($providers as $provider => $args) {
-			if (!class_exists($provider) || !($args['enabled'] ?? false)) {
+			if (! class_exists($provider) || ! ($args['enabled'] ?? false)) {
 				continue;
 			}
 
 			$class = new $provider($this->app);
 
-			if (!is_object($class)) {
+			if (! is_object($class)) {
 				continue;
 			}
 
