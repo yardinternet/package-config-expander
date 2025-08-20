@@ -1,5 +1,6 @@
 .phpunit.cache
 .php-cs-fixer.cache
+.idea
 vendor
 node_modules
 build
