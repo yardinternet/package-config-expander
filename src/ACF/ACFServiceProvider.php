@@ -260,15 +260,15 @@ class ACFServiceProvider extends ServiceProvider
 					'message' => '',
 					'default_value' => 0,
 					'ui' => 1,
-					'ui_on_text' => 'On',
-					'ui_off_text' => 'Off',
+					'ui_on_text' => 'Aan',
+					'ui_off_text' => 'Uit',
 				],
 				[
 					'key' => 'field_66696647125c',
 					'label' => 'Under construction pagina',
 					'name' => 'under_construction_page',
 					'aria-label' => '',
-					'type' => 'select',
+					'type' => 'post_object',
 					'instructions' => 'Selecteer pagina om te tonen',
 					'required' => 0,
 					'conditional_logic' => [
@@ -285,11 +285,12 @@ class ACFServiceProvider extends ServiceProvider
 						'class' => '',
 						'id' => '',
 					],
-					'choices' => array_reduce(get_pages(), function ($choices, $page) {
-						$choices[$page->ID] = $page->post_title;
-
-						return $choices;
-					}),
+					'post_type' => [
+						0 => 'page',
+					],
+					'taxonomy' => [],
+					'allow_null' => 0,
+					'multiple' => 0,
 				],
 			],
 			'location' => [
