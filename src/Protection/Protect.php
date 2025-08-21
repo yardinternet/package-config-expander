@@ -152,9 +152,11 @@ class Protect
 			return;
 		}
 
-		echo view('yard-config-expander::under-construction-page', [
+		echo response()->view('yard-config-expander::under-construction-page', [
 			'title' => $post->post_title,
 			'content' => $post->post_content,
+		])->setStatusCode(503)->withHeaders([
+			'retry-after' => DAY_IN_SECONDS,
 		]);
 
 		exit;
