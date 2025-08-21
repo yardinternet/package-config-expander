@@ -1,58 +1,60 @@
 {
-	"name": "yard/config-expander",
-	"type": "package",
-	"description": "Adds necessary security, defaults and settings to this site.",
-	"license": "MIT",
-	"config": {
-		"allow-plugins": {
-			"pestphp/pest-plugin": true,
-			"composer/installers": true
-		},
-		"platform": {
-			"php": "8.1"
-		}
-	},
-	"require": {
-		"php": ">=8.1",
-		"spatie/laravel-package-tools": "^1.16"
-	},
-	"require-dev": {
-		"10up/wp_mock": "^0.4.2",
-		"larastan/larastan": "^2.0",
-		"orchestra/testbench": "^8.23",
-		"pestphp/pest": "^2.34",
-		"szepeviktor/phpstan-wordpress": "^1.0",
-		"yard/php-cs-fixer-rules": "^1.0"
-	},
-	"autoload": {
-		"psr-4": {
-			"Yard\\ConfigExpander\\": "src/"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"Yard\\ConfigExpander\\Tests\\": "tests/"
-		}
-	},
-	"scripts": {
-		"post-autoload-dump": [
-			"sed -i -e 's#function __(#function ____(#' ./vendor/php-stubs/wordpress-stubs/wordpress-stubs.php"
-		],
-		"all": [
-			"@test",
-			"@analyse",
-			"@format"
-		],
-		"analyse": "vendor/bin/phpstan analyse --debug --memory-limit 1G",
-		"format": "vendor/bin/php-cs-fixer fix",
-		"test": "vendor/bin/pest",
-		"test:coverage": "XDEBUG_MODE=coverage vendor/bin/pest --coverage"
-	},
-	"extra": {
-		"acorn": {
-			"providers": [
-				"Yard\\ConfigExpander\\ConfigExpanderServiceProvider"
-			]
-		}
-	}
+  "name": "yard/config-expander",
+  "type": "package",
+  "description": "Adds necessary security, defaults and settings to this site.",
+  "license": "MIT",
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true,
+      "composer/installers": true
+    },
+    "platform": {
+      "php": "8.1"
+    }
+  },
+  "require": {
+    "php": ">=8.1",
+    "spatie/laravel-package-tools": "^1.16"
+  },
+  "require-dev": {
+    "10up/wp_mock": "^0.4.2",
+    "larastan/larastan": "^2.0",
+    "orchestra/testbench": "^8.23",
+    "pestphp/pest": "^2.34",
+    "szepeviktor/phpstan-wordpress": "^1.0",
+    "yard/php-cs-fixer-rules": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Yard\\ConfigExpander\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Yard\\ConfigExpander\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "post-autoload-dump": [
+      "if [ -f ./vendor/laravel/framework/src/Illuminate/Foundation/helpers.php ]; then sed -i -e \"s#function __(#function a__(#\" ./vendor/laravel/framework/src/Illuminate/Foundation/helpers.php; fi",
+      "if [ -f ./vendor/roots/acorn/src/Illuminate/Foundation/helpers.php ]; then sed -i -e \"s#function __(#function b__(#\" ./vendor/roots/acorn/src/Illuminate/Foundation/helpers.php; fi",
+      "if [ -f ./vendor/larastan/larastan/stubs/common/Helpers.stub ]; then sed -i -e \"s#function __(#function c__(#\" ./vendor/larastan/larastan/stubs/common/Helpers.stub; fi"
+    ],
+    "all": [
+      "@test",
+      "@analyse",
+      "@format"
+    ],
+    "analyse": "vendor/bin/phpstan analyse --debug --memory-limit 1G",
+    "format": "vendor/bin/php-cs-fixer fix",
+    "test": "vendor/bin/pest",
+    "test:coverage": "XDEBUG_MODE=coverage vendor/bin/pest --coverage"
+  },
+  "extra": {
+    "acorn": {
+      "providers": [
+        "Yard\\ConfigExpander\\ConfigExpanderServiceProvider"
+      ]
+    }
+  }
 }
