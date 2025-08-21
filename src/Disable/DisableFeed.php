@@ -40,7 +40,6 @@ class DisableFeed
 
 	public static function disableFeed(): void
 	{
-		// @phpstan-ignore-next-line
 		$output = sprintf(__('This link does not work, go to our website: <a href="%s">%s</a>.', 'config-expander'), get_home_url(), get_bloginfo('name'));
 
 		wp_die($output);
@@ -49,7 +48,7 @@ class DisableFeed
 	/**
 	 * Unset each internal ping.
 	 *
-	 * @param array<string, string> $links
+	 * @param  array<string, string>  $links
 	 */
 	public static function removeInternalPingbacks(array &$links): void
 	{
@@ -61,7 +60,7 @@ class DisableFeed
 			}
 
 			if (0 === strpos($link, $home)) {
-				unset($links[ $l ]);
+				unset($links[$l]);
 			}
 		}
 	}
@@ -77,7 +76,7 @@ class DisableFeed
 	/**
 	 * Unset x-pingback.
 	 *
-	 * @param array<string, string> $headers
+	 * @param  array<string, string>  $headers
 	 *
 	 * @return array<string, string> $headers
 	 */
@@ -124,7 +123,7 @@ class DisableFeed
 	/**
 	 * Add allowed methods in array format for the XML RPC protocol.
 	 *
-	 * @param array<string, string> $methods
+	 * @param  array<string, string>  $methods
 	 *
 	 * @return array<string, string> $methods
 	 */
@@ -137,11 +136,11 @@ class DisableFeed
 		}
 
 		if (! is_array($xmlrpcMethods)) {
-			$xmlrpcMethods = (array)$xmlrpcMethods;
+			$xmlrpcMethods = (array) $xmlrpcMethods;
 		}
 
 		foreach ($xmlrpcMethods as $xmlrpcAllowedMethod => $xmlrpcAllowedInternalMethod) {
-			$methods[ $xmlrpcAllowedMethod ] = $xmlrpcAllowedInternalMethod;
+			$methods[$xmlrpcAllowedMethod] = $xmlrpcAllowedInternalMethod;
 		}
 
 		return $methods;

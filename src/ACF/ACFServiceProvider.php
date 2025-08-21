@@ -17,7 +17,6 @@ class ACFServiceProvider extends ServiceProvider
 	{
 		if (! $this->isPluginActive('advanced-custom-fields-pro/acf.php')) {
 			add_action('admin_notices', function () {
-				// @phpstan-ignore-next-line
 				echo sprintf(
 					'<div class="notice notice-error"><p><strong>Yard Digital: </strong>%s</p></div>',
 					__(
