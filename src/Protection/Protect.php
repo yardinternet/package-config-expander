@@ -25,6 +25,7 @@ class Protect
 		if ($this->underConstructionEnabled()) {
 			$this->getUnderConstructionPage();
 		}
+
 		$this->denyAccess();
 	}
 
@@ -144,11 +145,11 @@ class Protect
 			return;
 		}
 
-		$pageId = get_field('under_construction_page', 'options');
+		$pageId = get_field('under_construction_page', 'options') ?: null;
 
 		$post = get_post($pageId);
 
-		if (! $post) {
+		if (! $post instanceof \WP_Post) {
 			return;
 		}
 
