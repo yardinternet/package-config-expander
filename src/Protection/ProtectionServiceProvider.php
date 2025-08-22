@@ -32,10 +32,7 @@ class ProtectionServiceProvider extends ServiceProvider
 
 	public function showProtectionStatus(WP_Admin_Bar $adminBar): void
 	{
-		if (! current_user_can('manage_options')) {
-			return;
-		}
-		if (! function_exists('get_field')) {
+		if (! current_user_can('manage_options') || ! function_exists('get_field')) {
 			return;
 		}
 
