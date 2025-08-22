@@ -25,7 +25,7 @@ class ProtectionServiceProvider extends ServiceProvider
 		add_filter('varnish_http_purge_events_full', [$this, 'addCustomPurgeEvent']);
 	}
 
-	private function hooks()
+	private function hooks(): void
 	{
 		add_action('admin_bar_menu', [$this, 'showProtectionStatus'], 9999, 1);
 	}
