@@ -152,11 +152,11 @@ class Protect
 			return;
 		}
 
-		echo response()->view('yard-config-expander::under-construction-page', [
+		header('HTTP/1.0 503 Service Unavailable');
+		header('Retry-After: ' . DAY_IN_SECONDS);
+		echo view('yard-config-expander::under-construction-page', [
 			'title' => $post->post_title,
 			'content' => $post->post_content,
-		])->setStatusCode(503)->withHeaders([
-			'retry-after' => DAY_IN_SECONDS,
 		]);
 
 		exit;
