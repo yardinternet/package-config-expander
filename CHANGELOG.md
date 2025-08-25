@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.2.13 - 2025-08-25
+
+- Feat: publish command for views
+
 ## v1.2.12 - 2025-08-25
 
 - Feat: under construction page selector
