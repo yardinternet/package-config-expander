@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v1.2.12 - 2025-08-25
+
+- Feat: under construction page selector
+- Feat: admin notice showing protection active
+- Change: enable protection on accept and production
+
 ## v1.2.11 - 2025-08-15
 
 - Fix: styling for WordFence 2FA
