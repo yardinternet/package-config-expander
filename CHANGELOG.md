@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.2.14 - 2025-08-25
+
+- Chore: rename views publish tag
+
 ## v1.2.13 - 2025-08-25
 
 - Feat: publish command for views
