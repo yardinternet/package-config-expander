@@ -27,6 +27,10 @@ class ConfigExpanderServiceProvider extends ServiceProvider
 			__DIR__ . '/../config/yard-config-expander.php' => $this->app->configPath('yard-config-expander.php'),
 		], 'config');
 
+		$this->publishes([
+			__DIR__ . '/../resources/views' => $this->app->resourcePath('views/vendor/yard-config-expander'),
+		], 'views');
+
 		$this->callServiceProviders('boot');
 		$this->loadRoutesFrom(__DIR__ . '/routes/web.php');
 		$this->loadViewsFrom(__DIR__ . '/../resources/views', 'yard-config-expander');
