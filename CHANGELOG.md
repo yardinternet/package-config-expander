@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.2.15 - 2025-08-25
+
+- Fix: Change the way under construction page is returned to avoid raw output of laravel headers
+
 ## v1.2.14 - 2025-08-25
 
 - Chore: rename views publish tag
