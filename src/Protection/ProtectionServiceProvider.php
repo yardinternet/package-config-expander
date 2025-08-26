@@ -32,6 +32,9 @@ class ProtectionServiceProvider extends ServiceProvider
 
 	public function showProtectionStatus(WP_Admin_Bar $adminBar): void
 	{
+		if (defined('WP_ENV') && WP_ENV === 'development') {
+			return;
+		}
 		if (! current_user_can('manage_options') || ! function_exists('get_field')) {
 			return;
 		}
