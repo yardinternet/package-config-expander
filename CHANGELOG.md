@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.2.16 - 2025-08-26
+
+- Feat: Don't protection notice bar in development
+
 ## v1.2.15 - 2025-08-25
 
 - Fix: Change the way under construction page is returned to avoid raw output of laravel headers
