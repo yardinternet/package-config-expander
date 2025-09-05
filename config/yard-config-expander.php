@@ -19,6 +19,9 @@ return [
 		'Yard\ConfigExpander\Cleanup\CleanupServiceProvider' => [
 			'enabled' => true,
 		],
+		'Yard\ConfigExpander\Cache\CacheServiceProvider' => [
+			'enabled' => true,
+		],
 		'Yard\ConfigExpander\Licenses\LicensesServiceProvider' => [
 			'enabled' => true,
 		],
@@ -57,6 +60,13 @@ return [
 		'plugins' => [
 			Yard\ConfigExpander\Cleanup\Plugins\Stream::class,
 			Yard\ConfigExpander\Cleanup\Plugins\SearchWP::class,
+		],
+	],
+	'cache' => [
+		'bypass' => [
+			'blocks' => [
+				// 'yard/example-block',
+			],
 		],
 	],
 	'licenses' => [

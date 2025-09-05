@@ -14,26 +14,26 @@ To install this package using Composer, follow these steps:
 
 1. Add the following to the `repositories` section of your `composer.json`:
 
-    ```json
-    {
-      "type": "vcs",
-      "url": "git@github.com:yardinternet/package-config-expander.git"
-    }
-    ```
+   ```json
+   {
+     "type": "vcs",
+     "url": "git@github.com:yardinternet/package-config-expander.git"
+   }
+   ```
 
 2. Add the following to the `require` section of your `composer.json`:
 
-    ```json
-    {
-      "yard/config-expander": "*"
-    }
-    ```
+   ```json
+   {
+     "yard/config-expander": "*"
+   }
+   ```
 
 3. Run the following command to install the package:
 
-    ```sh
-    composer update
-    ```
+   ```sh
+   composer update
+   ```
 
 You can publish the config file with:
 
@@ -68,6 +68,9 @@ $config = [
       'enabled' => true,
     ],
     'Yard\ConfigExpander\Cleanup\CleanupServiceProvider' => [
+      'enabled' => true,
+    ],
+    'Yard\ConfigExpander\Cache\CacheServiceProvider' => [
       'enabled' => true,
     ],
     'Yard\ConfigExpander\Licenses\LicensesServiceProvider' => [
