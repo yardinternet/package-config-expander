@@ -25,7 +25,7 @@ class CacheServiceProvider extends ServiceProvider
 	{
 		$bypassBlocks = resolve('config')->get('yard-config-expander.cache.bypass.blocks', []);
 
-		if (! empty($bypassBlocks) && is_array($bypassBlocks) && is_singular() && ($postId = get_queried_object_id())) {
+		if (is_array($bypassBlocks) && [] !== $bypassBlocks && is_singular() && ($postId = get_queried_object_id())) {
 			// Refactor to array_any when upgrading to PHP 8.4
 			if (array_filter($bypassBlocks, fn ($blockName) => is_string($blockName) && has_block($blockName, $postId)) !== []) {
 				nocache_headers();
