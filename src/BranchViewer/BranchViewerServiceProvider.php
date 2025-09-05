@@ -47,11 +47,11 @@ class BranchViewerServiceProvider extends ServiceProvider
 	 * Checks if the current user is allowed to access the branch viewer admin bar node.
 	 *
 	 * A user is considered whitelisted if their role matches one of the roles
-	 * provided by the `yard/config-expander/branch-viewer/whitelisted-roles` filter.
+	 * provided by the `yard::config-expander/branch-viewer/whitelisted-roles` filter.
 	 */
 	private function isUserWhitelisted(): bool
 	{
-		$whitelistedRoles = apply_filters('yard/config-expander/branch-viewer/whitelisted-roles', ['administrator']);
+		$whitelistedRoles = apply_filters('yard::config-expander/branch-viewer/whitelisted-roles', ['administrator']);
 		if (! is_array($whitelistedRoles) || 1 > count($whitelistedRoles)) {
 			return false;
 		}
