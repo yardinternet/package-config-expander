@@ -27,7 +27,7 @@ class CacheServiceProvider extends ServiceProvider
 
 		if (! empty($bypassBlocks) && is_singular() && ($postId = get_queried_object_id())) {
 			// Refactor to array_any when upgrading to PHP 8.4
-			if (! empty(array_filter($bypassBlocks, fn ($blockName) => has_block($blockName, $postId)))) {
+			if (is_array($bypassBlocks) && ! empty(array_filter($bypassBlocks, fn ($blockName) => is_string($blockName) && has_block($blockName, $postId)))) {
 				nocache_headers();
 			}
 		}

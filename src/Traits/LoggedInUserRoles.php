@@ -18,6 +18,9 @@ trait LoggedInUserRoles
 		return in_array($role, $roles, true);
 	}
 
+	/**
+	 * @return array<string>
+	 */
 	public function getLoggedInUserRoles(): array
 	{
 		$user = wp_get_current_user();
