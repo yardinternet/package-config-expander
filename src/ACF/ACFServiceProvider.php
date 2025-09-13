@@ -244,11 +244,11 @@ class ACFServiceProvider extends ServiceProvider
 				],
 				[
 					'key' => 'field_66696647125b',
-					'label' => 'Under construction mode',
-					'name' => 'under_construction_mode',
+					'label' => 'Maintenance mode',
+					'name' => 'maintenance_mode',
 					'aria-label' => '',
 					'type' => 'true_false',
-					'instructions' => 'Zet aan om een under construction pagina te selecteren voor bezoekers',
+					'instructions' => 'Zet aan om een maintenance pagina te selecteren voor bezoekers',
 					'required' => 0,
 					'conditional_logic' => 0,
 					'wrapper' => [
@@ -264,8 +264,8 @@ class ACFServiceProvider extends ServiceProvider
 				],
 				[
 					'key' => 'field_66696647125c',
-					'label' => 'Under construction pagina',
-					'name' => 'under_construction_page',
+					'label' => 'Maintenance pagina',
+					'name' => 'maintenance_page',
 					'aria-label' => '',
 					'type' => 'post_object',
 					'instructions' => 'Selecteer pagina om te tonen',
