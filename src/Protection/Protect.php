@@ -22,8 +22,8 @@ class Protect
 			return;
 		}
 
-		if ($this->underConstructionEnabled()) {
-			$this->getUnderConstructionPage();
+		if ($this->maintenanceModeEnabled()) {
+			$this->getMaintenancePage();
 		}
 
 		$this->denyAccess();
@@ -133,18 +133,18 @@ class Protect
 		return array_map(fn ($entity) => new WhitelistEntity($entity), $group);
 	}
 
-	protected function underConstructionEnabled(): bool
+	protected function maintenanceModeEnabled(): bool
 	{
-		return function_exists('get_field') && (bool) get_field('under_construction_mode', 'options');
+		return function_exists('get_field') && (bool) get_field('maintenance_mode', 'options');
 	}
 
-	protected function getUnderConstructionPage(): void
+	protected function getMaintenancePage(): void
 	{
 		if (! function_exists('get_field')) {
 			return;
 		}
 
-		$pageId = get_field('under_construction_page', 'options') ?: null;
+		$pageId = get_field('maintenance_page', 'options') ?: null;
 
 		$post = get_post($pageId);
 
@@ -154,7 +154,7 @@ class Protect
 
 		header('HTTP/1.0 503 Service Unavailable');
 		header('Retry-After: ' . DAY_IN_SECONDS);
-		echo view('yard-config-expander::under-construction-page', [
+		echo view('yard-config-expander::maintenance-page', [
 			'title' => $post->post_title,
 			'content' => $post->post_content,
 		]);
