@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.2.17 - 2025-09-15
+
+- Refactor: rename under construction to maintenance
+
 ## v1.2.16 - 2025-08-26
 
 - Feat: Don't protection notice bar in development
