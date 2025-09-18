@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Yard\ConfigExpander\Protection;
 
+use WP_Post;
+
 class Protect
 {
 	public function handleSite(): void
@@ -145,10 +147,9 @@ class Protect
 		}
 
 		$pageId = get_field('maintenance_page', 'options') ?: null;
-
 		$post = get_post($pageId);
 
-		if (! $post instanceof \WP_Post) {
+		if (! $post instanceof WP_Post) {
 			return;
 		}
 
