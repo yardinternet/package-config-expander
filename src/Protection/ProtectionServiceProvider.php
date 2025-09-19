@@ -7,9 +7,12 @@ namespace Yard\ConfigExpander\Protection;
 use Illuminate\Support\ServiceProvider;
 use WP_Admin_Bar;
 use Yard\ConfigExpander\Support\Helpers\WordPressEnvironment;
+use Yard\ConfigExpander\Support\Traits\Route;
 
 class ProtectionServiceProvider extends ServiceProvider
 {
+	use Route;
+
 	public function register(): void
 	{
 		$this->app->singleton('protect', function ($app) {
@@ -25,9 +28,16 @@ class ProtectionServiceProvider extends ServiceProvider
 
 	private function hooks(): void
 	{
+		add_action('admin_enqueue_scripts', $this->enqueueProtectionStyles(...));
 		add_action('admin_bar_menu', $this->showProtectionStatus(...), 9999, 1);
 		add_filter('varnish_http_purge_events', $this->addCustomPurgeEvent(...));
 		add_filter('varnish_http_purge_events_full', $this->addCustomPurgeEvent(...));
+	}
+
+	public function enqueueProtectionStyles(): void
+	{
+		$source = apply_filters('yard::config-expander/protection-status/style-file', $this->route('/yard/config-expander/resources/css/protection.css'));
+		wp_enqueue_style('config-expander-protection-styling', $source, [], false, 'all');
 	}
 
 	public function showProtectionStatus(WP_Admin_Bar $adminBar): void
@@ -41,15 +51,15 @@ class ProtectionServiceProvider extends ServiceProvider
 		}
 
 		$type = get_field('type_protection_website', 'options');
+		$isMaintenanceMode = get_field('maintenance_mode', 'options');
 
-		if (empty($type) || 'none' === $type) {
+		if (! is_string($type) || ('none' === $type && ! $isMaintenanceMode)) {
 			return;
 		}
 
-		// TODO clearner to adjust inline styling to css file
 		$adminBar->add_node([
 			'id' => 'protection-status',
-			'title' => '<span style="background:#e63946;color:#fff;padding:0 8px;border-radius:4px;display:inline-block;">Site is afgeschermd!</span>',
+			'title' => sprintf('<span class="protection-status">%s</span>', $isMaintenanceMode ? 'Site is in onderhoud!' : 'Site is afgeschermd!'),
 		]);
 	}
 
