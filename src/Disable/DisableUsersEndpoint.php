@@ -16,8 +16,8 @@ class DisableUsersEndpoint
 			return;
 		}
 
-		add_filter('rest_endpoints', [__CLASS__, 'removeUsersEndpoints']);
-		add_filter('rest_pre_dispatch', [__CLASS__, 'disableUsersView'], 10, 3);
+		add_filter('rest_endpoints', self::removeUsersEndpoints(...));
+		add_filter('rest_pre_dispatch', self::disableUsersView(...), 10, 3);
 	}
 
 	/**
