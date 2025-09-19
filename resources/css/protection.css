@@ -1,0 +1,7 @@
+span.protection-status {
+ background: #e63946 !important;
+ color: #fff !important;
+ padding: 0 8px !important;
+ border-radius: 4px !important;
+ display: inline-block !important;
+}
