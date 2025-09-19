@@ -100,7 +100,7 @@ class ProtectionServiceProvider extends ServiceProvider
 
 	private function shouldInitProtection(): bool
 	{
-		if (defined('WP_CLI') && WP_CLI || (defined('WP_ENV') && WP_ENV === 'developmentt')) {
+		if (defined('WP_CLI') && WP_CLI || WordPressEnvironment::isDevelopment()) {
 			return false;
 		}
 
