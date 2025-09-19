@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Yard\ConfigExpander\Licenses\Contracts;
 
-use Yard\ConfigExpander\Traits\PluginActive;
+use Yard\ConfigExpander\Support\Traits\PluginActive;
 
 abstract class AbstractLicense implements LicenseInterface
 {

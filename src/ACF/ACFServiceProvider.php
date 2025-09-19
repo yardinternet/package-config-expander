@@ -7,8 +7,8 @@ namespace Yard\ConfigExpander\ACF;
 use Illuminate\Support\ServiceProvider;
 use Yard\ConfigExpander\ACF\Controllers\ProtectionTypeController;
 use Yard\ConfigExpander\ACF\Controllers\WhitelistGroupController;
-use Yard\ConfigExpander\Traits\PluginActive;
-use Yard\ConfigExpander\Traits\Route;
+use Yard\ConfigExpander\Support\Traits\PluginActive;
+use Yard\ConfigExpander\Support\Traits\Route;
 
 class ACFServiceProvider extends ServiceProvider
 {

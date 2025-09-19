@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Yard\ConfigExpander\ACF\Controllers;
 
-use Yard\ConfigExpander\Traits\WordPressEnvironment;
+use Yard\ConfigExpander\Support\Helpers\WordPressEnvironment;
 
 class ProtectionTypeController
 {
-	use WordPressEnvironment;
-
 	protected string $fieldName = 'type_protection_website';
 
 	/** @var string[] */
@@ -21,7 +19,7 @@ class ProtectionTypeController
 	 */
 	public function disableFrontendProtection(): void
 	{
-		if (! $this->isProductionEnvironment()) {
+		if (! WordPressEnvironment::isProduction()) {
 			return;
 		}
 
