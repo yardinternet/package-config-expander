@@ -90,7 +90,7 @@ class ACFServiceProvider extends ServiceProvider
 			'fields' => [
 				[
 					'key' => 'field_666962b381791',
-					'label' => 'Site afscherming',
+					'label' => 'Toegangsbeperking',
 					'name' => '',
 					'aria-label' => '',
 					'type' => 'tab',
@@ -108,7 +108,7 @@ class ACFServiceProvider extends ServiceProvider
 				],
 				[
 					'key' => 'field_666962bd81792',
-					'label' => 'Type afscherming',
+					'label' => 'Type blokkade',
 					'name' => 'type_protection_website',
 					'aria-label' => '',
 					'type' => 'select',
@@ -216,7 +216,7 @@ class ACFServiceProvider extends ServiceProvider
 								],
 								[
 									'key' => 'field_66695f66041d4',
-									'label' => 'Type afscherming',
+									'label' => 'Toegang tot',
 									'name' => 'type',
 									'aria-label' => '',
 									'type' => 'select',
