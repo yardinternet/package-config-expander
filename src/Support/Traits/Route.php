@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yard\ConfigExpander\Traits;
+namespace Yard\ConfigExpander\Support\Traits;
 
 use RuntimeException;
 

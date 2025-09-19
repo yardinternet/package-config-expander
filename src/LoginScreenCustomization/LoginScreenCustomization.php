@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Yard\ConfigExpander\LoginScreenCustomization;
 
-use Yard\ConfigExpander\Traits\Route;
+use Yard\ConfigExpander\Support\Traits\Route;
 
 class LoginScreenCustomization
 {

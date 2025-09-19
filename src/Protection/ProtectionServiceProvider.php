@@ -6,12 +6,10 @@ namespace Yard\ConfigExpander\Protection;
 
 use Illuminate\Support\ServiceProvider;
 use WP_Admin_Bar;
-use Yard\ConfigExpander\Traits\WordPressEnvironment;
+use Yard\ConfigExpander\Support\Helpers\WordPressEnvironment;
 
 class ProtectionServiceProvider extends ServiceProvider
 {
-	use WordPressEnvironment;
-
 	public function register(): void
 	{
 		$this->app->singleton('protect', function ($app) {
@@ -34,7 +32,7 @@ class ProtectionServiceProvider extends ServiceProvider
 
 	public function showProtectionStatus(WP_Admin_Bar $adminBar): void
 	{
-		if ($this->isDevelopmentEnvironment()) {
+		if (WordPressEnvironment::isDevelopment()) {
 			return;
 		}
 
@@ -92,7 +90,7 @@ class ProtectionServiceProvider extends ServiceProvider
 
 	private function shouldInitProtection(): bool
 	{
-		if (defined('WP_CLI') && WP_CLI || (defined('WP_ENV') && WP_ENV === 'development')) {
+		if (defined('WP_CLI') && WP_CLI || (defined('WP_ENV') && WP_ENV === 'developmentt')) {
 			return false;
 		}
 
