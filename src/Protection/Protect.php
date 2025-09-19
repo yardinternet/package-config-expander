@@ -97,7 +97,7 @@ class Protect
 	}
 
 	/**
-	 * @return string[]
+	 * @return array<int, string>
 	 */
 	protected function getProtectionTypesWebsite(): array
 	{
@@ -107,7 +107,7 @@ class Protect
 
 		$type = get_field('type_protection_website', 'options');
 
-		if (empty($type) || 'none' === $type) {
+		if (! is_string($type) || 'none' === $type) {
 			return [];
 		}
 
@@ -119,7 +119,6 @@ class Protect
 	 */
 	protected function getWhitelistedEntities(): array
 	{
-		// @phpstan-ignore-next-line
 		$field = get_field('ip_whistelisting', 'options');
 
 		if (! is_array($field) || empty($field)) {
@@ -146,8 +145,7 @@ class Protect
 			return;
 		}
 
-		$pageId = get_field('maintenance_page', 'options') ?: null;
-		$post = get_post($pageId);
+		$post = get_field('maintenance_page', 'options');
 
 		if (! $post instanceof WP_Post) {
 			return;

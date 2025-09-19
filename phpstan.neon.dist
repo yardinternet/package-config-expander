@@ -7,6 +7,8 @@ parameters:
     paths:
         - src
     tmpDir: build/phpstan
+    scanFiles:
+        - vendor/php-stubs/acf-pro-stubs/acf-pro-stubs.php
     ignoreErrors:
         - '#has parameter \$request with generic class WP_REST_Request but does not specify its types#'
         - '#has parameter \$result with generic class WP_REST_Request but does not specify its types#'

@@ -23,7 +23,6 @@ class ProtectionTypeController
 			return;
 		}
 
-		// @phpstan-ignore-next-line
 		$protectionType = get_field($this->fieldName, 'option') ?: '';
 
 		if (! is_string($protectionType) || '' === $protectionType) {
@@ -34,7 +33,6 @@ class ProtectionTypeController
 			$protectionType = 'none';
 		}
 
-		// @phpstan-ignore-next-line
 		update_field($this->fieldName, $protectionType, 'option');
 	}
 }

@@ -34,7 +34,6 @@ class WhitelistGroupController
 
 		$group[$this->repeaterName] = array_values($rows);
 
-		// @phpstan-ignore-next-line
 		update_field($this->groupName, $group, 'option');
 
 		$this->setDefaultsReadonly();
@@ -65,7 +64,6 @@ class WhitelistGroupController
 	 */
 	protected function getGroupWithRows(): array
 	{
-		// @phpstan-ignore-next-line
 		$group = get_field($this->groupName, 'option');
 
 		if (! is_array($group)) {
