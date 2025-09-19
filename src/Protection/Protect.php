@@ -20,12 +20,12 @@ class Protect
 
 	protected function authorizeAccess(string $type): void
 	{
-		if ($this->checkIfVisitorHasAccess($type)) {
-			return;
-		}
-
 		if ($this->maintenanceModeEnabled()) {
 			$this->getMaintenancePage();
+		}
+
+		if ($this->checkIfVisitorHasAccess($type)) {
+			return;
 		}
 
 		$this->denyAccess();
