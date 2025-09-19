@@ -36,6 +36,28 @@ class WhitelistGroupController
 
 		// @phpstan-ignore-next-line
 		update_field($this->groupName, $group, 'option');
+
+		$this->setDefaultsReadonly();
+	}
+
+	/**
+	 * Sets the default whitelist entries as read-only in the ACF admin interface,
+	 * except for the protection type field.
+	 */
+	protected function setDefaultsReadonly(): void
+	{
+		$makeReadonly = function ($field, string $key) {
+			$values = array_column($this->defaults, $key);
+
+			if (isset($field['value']) && in_array($field['value'], $values, true)) {
+				$field['readonly'] = true;
+			}
+
+			return $field;
+		};
+
+		add_filter('acf/prepare_field/name=whitelisted_ip_address', fn ($field) => $makeReadonly($field, 'whitelisted_ip_address'));
+		add_filter('acf/prepare_field/name=whitelisted_description', fn ($field) => $makeReadonly($field, 'whitelisted_description'));
 	}
 
 	/**
