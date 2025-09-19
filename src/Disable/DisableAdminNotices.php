@@ -14,8 +14,8 @@ class DisableAdminNotices
 
 		// @phpstan-ignore-next-line
 		add_action('admin_notices', 'update_nag', 3);
-		add_action('admin_enqueue_scripts', [__CLASS__, 'adminThemeStyle']);
-		add_action('login_enqueue_scripts', [__CLASS__, 'adminThemeStyle']);
+		add_action('admin_enqueue_scripts', self::adminThemeStyle(...));
+		add_action('login_enqueue_scripts', self::adminThemeStyle(...));
 	}
 
 	/**

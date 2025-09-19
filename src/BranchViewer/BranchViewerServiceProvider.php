@@ -18,7 +18,7 @@ class BranchViewerServiceProvider extends ServiceProvider
 
 	private function hooks(): void
 	{
-		add_action('admin_bar_menu', [$this, 'addBranchViewer'], 9999, 1);
+		add_action('admin_bar_menu', $this->addBranchViewer(...), 9999, 1);
 	}
 
 	public function addBranchViewer(WP_Admin_Bar $adminBar): void

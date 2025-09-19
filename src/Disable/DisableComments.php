@@ -8,19 +8,19 @@ class DisableComments
 {
 	public static function init(): void
 	{
-		add_action('wp_loaded', [__CLASS__, 'disableCommentsPostTypesSupport']);
-		add_filter('comments_array', [__CLASS__, 'disableCommentsHideExistingComments'], 10, 2);
-		add_action('admin_menu', [__CLASS__, 'removeCommentsAdminMenu']);
-		add_action('admin_init', [__CLASS__, 'removeCommentsAdminMenuRedirect']);
-		add_action('admin_init', [__CLASS__, 'removeCommentsWidgetDashboard']);
-		add_action('add_admin_bar_menus', [__CLASS__, 'removeCommentsItemAdminBar']);
+		add_action('wp_loaded', self::disableCommentsPostTypesSupport(...));
+		add_filter('comments_array', self::disableCommentsHideExistingComments(...), 10, 2);
+		add_action('admin_menu', self::removeCommentsAdminMenu(...));
+		add_action('admin_init', self::removeCommentsAdminMenuRedirect(...));
+		add_action('admin_init', self::removeCommentsWidgetDashboard(...));
+		add_action('add_admin_bar_menus', self::removeCommentsItemAdminBar(...));
 
-		add_filter('manage_pages_columns', [__CLASS__, 'removeCommentsColumns']);
-		add_filter('manage_media_columns', [__CLASS__, 'removeCommentsColumns']);
-		add_filter('get_comments_number', [__CLASS__, 'disableFeedCommentsRemoveCount'], 10, 2);
-		add_filter('post_comments_feed_link', [__CLASS__, 'disableFeedCommentsRemoveLinks'], 10, 1);
-		add_filter('comments_link_feed', [__CLASS__, 'disableFeedCommentsRemoveLinks'], 10, 1);
-		add_filter('comment_link', [__CLASS__, 'disableFeedCommentsRemoveLinks'], 10, 1);
+		add_filter('manage_pages_columns', self::removeCommentsColumns(...));
+		add_filter('manage_media_columns', self::removeCommentsColumns(...));
+		add_filter('get_comments_number', self::disableFeedCommentsRemoveCount(...), 10, 2);
+		add_filter('post_comments_feed_link', self::disableFeedCommentsRemoveLinks(...), 10, 1);
+		add_filter('comments_link_feed', self::disableFeedCommentsRemoveLinks(...), 10, 1);
+		add_filter('comment_link', self::disableFeedCommentsRemoveLinks(...), 10, 1);
 		add_filter('comments_open', '__return_false', 20, 0);
 		add_filter('pings_open', '__return_false', 20, 0);
 	}

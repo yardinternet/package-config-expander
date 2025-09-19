@@ -11,21 +11,21 @@ class DisablePosts
 	 */
 	public static function init(): void
 	{
-		add_action('current_screen', [__CLASS__, 'redirectPostsViewToDashboard']);
-		add_action('admin_menu', [__CLASS__, 'removePostsFromMenu']);
-		add_action('wp_before_admin_bar_render', [__CLASS__, 'removePostsFromAdminToolbar']);
-		add_action('admin_init', [__CLASS__, 'removeDashboardWidgets']);
-		add_action('wp_head', [__CLASS__, 'restore_rss_feed'], 1); // Restore the main feed.
+		add_action('current_screen', self::redirectPostsViewToDashboard(...));
+		add_action('admin_menu', self::removePostsFromMenu(...));
+		add_action('wp_before_admin_bar_render', self::removePostsFromAdminToolbar(...));
+		add_action('admin_init', self::removeDashboardWidgets(...));
+		add_action('wp_head', self::restore_rss_feed(...), 1); // Restore the main feed.
 
 		remove_action('wp_head', 'feed_links', 2); // Remove main feeds.
 		remove_action('wp_head', 'feed_links_extra', 3); // Remove post comments feed.
 
-		add_filter('customize_nav_menu_available_item_types', [__CLASS__, 'removePostsFromCustomizer']);
-		add_action('admin_init', [__CLASS__, 'redirectPostToDashboard'], 10, 0);
-		add_action('admin_init', [__CLASS__, 'removeDashboardWidgetServeHappyNag'], 10, 0);
-		add_action('wp_dashboard_setup', [__CLASS__, 'disableDashboardWidgetServeHappyNag'], 10, 0);
-		add_filter('wp_count_posts', [__CLASS__, 'removePostOnAtAGlanceDashboard'], 10, 3);
-		add_action('rest_api_init', [__CLASS__, 'removePublicFacingSettingsForPosts']);
+		add_filter('customize_nav_menu_available_item_types', self::removePostsFromCustomizer(...));
+		add_action('admin_init', self::redirectPostToDashboard(...), 10, 0);
+		add_action('admin_init', self::removeDashboardWidgetServeHappyNag(...), 10, 0);
+		add_action('wp_dashboard_setup', self::disableDashboardWidgetServeHappyNag(...), 10, 0);
+		add_filter('wp_count_posts', self::removePostOnAtAGlanceDashboard(...), 10, 3);
+		add_action('rest_api_init', self::removePublicFacingSettingsForPosts(...));
 
 		self::removePublicFacingSettingsForPosts();
 	}

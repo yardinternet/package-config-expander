@@ -41,7 +41,7 @@ class DisableServiceProvider extends ServiceProvider
 		}
 
 		if ($settings['UNSET_ADMIN_ROLE_FOR_NON_ADMINS'] ?? true) {
-			add_filter('editable_roles', [DisableRoles::class, 'unsetAdminRoleForNonAdmins']);
+			add_filter('editable_roles', DisableRoles::unsetAdminRoleForNonAdmins(...));
 		}
 
 		if (! defined('WP_CACHE') && is_bool($settings['WP_CACHE'] ?? false)) {
@@ -77,11 +77,11 @@ class DisableServiceProvider extends ServiceProvider
 	protected function disablesAPI(array $settings): void
 	{
 		if ($settings['DISABLE_REST_API_OEMBED'] ?? true) {
-			add_action('wp_loaded', [DisableOEmbedEndpoint::class, 'init']);
+			add_action('wp_loaded', DisableOEmbedEndpoint::init(...));
 		}
 
 		if ($settings['DISABLE_REST_API_USERS'] ?? true) {
-			add_action('wp_loaded', [DisableUsersEndpoint::class, 'init']);
+			add_action('wp_loaded', DisableUsersEndpoint::init(...));
 		}
 	}
 
@@ -97,7 +97,7 @@ class DisableServiceProvider extends ServiceProvider
 		if (! ($settings['XMLRPC_ENABLED'] ?? false)) {
 			DisableFeed::disableXMLRPC();
 		} else {
-			add_filter('xmlrpc_methods', [DisableFeed::class, 'XMLRPCAllowedMethods']);
+			add_filter('xmlrpc_methods', DisableFeed::XMLRPCAllowedMethods(...));
 		}
 
 		if (($settings['CLEANUP_HEADERS'] ?? true)) {

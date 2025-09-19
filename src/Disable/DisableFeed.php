@@ -11,13 +11,13 @@ class DisableFeed
 	 */
 	public static function removeFeed(): void
 	{
-		add_action('do_feed', [__CLASS__, 'disableFeed'], 1);
-		add_action('do_feed_rdf', [__CLASS__, 'disableFeed'], 1);
-		add_action('do_feed_rss', [__CLASS__, 'disableFeed'], 1);
-		add_action('do_feed_rss2', [__CLASS__, 'disableFeed'], 1);
-		add_action('do_feed_atom', [__CLASS__, 'disableFeed'], 1);
-		add_action('do_feed_rss2_comments', [__CLASS__, 'disableFeed'], 1);
-		add_action('do_feed_atom_comments', [__CLASS__, 'disableFeed'], 1);
+		add_action('do_feed', self::disableFeed(...), 1);
+		add_action('do_feed_rdf', self::disableFeed(...), 1);
+		add_action('do_feed_rss', self::disableFeed(...), 1);
+		add_action('do_feed_rss2', self::disableFeed(...), 1);
+		add_action('do_feed_atom', self::disableFeed(...), 1);
+		add_action('do_feed_rss2_comments', self::disableFeed(...), 1);
+		add_action('do_feed_atom_comments', self::disableFeed(...), 1);
 
 		add_filter('the_generator', '__return_false', 10, 1);
 
@@ -25,17 +25,17 @@ class DisableFeed
 		add_filter('pings_open', '__return_false', 20);
 
 		// Disable internal pingbacks
-		add_action('pre_ping', [__CLASS__, 'removeInternalPingbacks'], 10, 1);
+		add_action('pre_ping', self::removeInternalPingbacks(...), 10, 1);
 
 		// Disable x-pingback
-		add_filter('wp_headers', [__CLASS__, 'removeXPingback'], 10, 1);
+		add_filter('wp_headers', self::removeXPingback(...), 10, 1);
 
 		// Remove feed links from the header
-		add_action('wp_loaded', [__CLASS__, 'removeUnusedLinksFromHeader'], 1, 1);
+		add_action('wp_loaded', self::removeUnusedLinksFromHeader(...), 1, 1);
 
 		// Set pingback URI to blank for blog info
-		add_filter('bloginfo_url', [__CLASS__, 'setPingbackUrlToBlank'], 1, 2);
-		add_filter('bloginfo', [__CLASS__, 'setPingbackUrlToBlank'], 1, 2);
+		add_filter('bloginfo_url', self::setPingbackUrlToBlank(...), 1, 2);
+		add_filter('bloginfo', self::setPingbackUrlToBlank(...), 1, 2);
 	}
 
 	public static function disableFeed(): void
