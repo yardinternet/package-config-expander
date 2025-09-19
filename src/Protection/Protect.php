@@ -20,7 +20,7 @@ class Protect
 
 	protected function authorizeAccess(string $type): void
 	{
-		if ($this->maintenanceModeEnabled()) {
+		if ($this->maintenanceModeEnabled() && $this->shouldShowMaintenancePage()) {
 			$this->getMaintenancePage();
 		}
 
@@ -137,6 +137,11 @@ class Protect
 	protected function maintenanceModeEnabled(): bool
 	{
 		return function_exists('get_field') && (bool) get_field('maintenance_mode', 'options');
+	}
+
+	protected function shouldShowMaintenancePage(): bool
+	{
+		return strpos($_SERVER['REQUEST_URI'], '/wp-login') === false && strpos($_SERVER['REQUEST_URI'], '/wp-admin') === false;
 	}
 
 	protected function getMaintenancePage(): void
