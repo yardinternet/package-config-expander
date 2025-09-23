@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v1.3.0 - 2025-09-23
+
+- Change: disable maintenance page on admin & login routes
+- Change: use first callable syntax where applicable
+- Change: maintenance mode does not rely on protection of website
+- Feat: disable front-end protection when in production
+- Feat: force default IP whitelist entries in ACF options page
+- Feat: implement PHPStan acf-pro-stubs
+
 ## v1.2.17 - 2025-09-15
 
 - Refactor: rename under construction to maintenance
