@@ -8,7 +8,7 @@ class DisableOEmbedEndpoint
 {
 	public static function init(): void
 	{
-		if (! \is_user_logged_in() || ! current_user_can('list_users')) { // Maybe alter 'list_users'?
+		if (! \is_user_logged_in() || ! current_user_can('edit_posts')) {
 			\remove_action('rest_api_init', 'wp_oembed_register_route');
 		}
 	}
