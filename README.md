@@ -12,16 +12,7 @@ This repository provides a scaffold for creating an Acorn package. For more deta
 
 To install this package using Composer, follow these steps:
 
-1. Add the following to the `repositories` section of your `composer.json`:
-
-    ```json
-    {
-      "type": "vcs",
-      "url": "git@github.com:yardinternet/package-config-expander.git"
-    }
-    ```
-
-2. Add the following to the `require` section of your `composer.json`:
+1. Add the following to the `require` section of your `composer.json`:
 
     ```json
     {
@@ -29,7 +20,7 @@ To install this package using Composer, follow these steps:
     }
     ```
 
-3. Run the following command to install the package:
+2. Run the following command to install the package:
 
     ```sh
     composer update
@@ -176,3 +167,7 @@ add_filter('yard::config-expander/login/logo-name', function(string $logo){
   return $logo;
 }, 10, 1);
 ```
+
+## About us
+
+[![banner](https://raw.githubusercontent.com/yardinternet/.github/refs/heads/main/profile/assets/small-banner-github.svg)](https://www.yard.nl/werken-bij/)
