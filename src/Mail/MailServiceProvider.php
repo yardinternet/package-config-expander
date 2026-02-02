@@ -27,5 +27,15 @@ class MailServiceProvider extends ServiceProvider
 				$phpmailer->Hostname = preg_replace('/^www\./', '', $hostName);
 			}
 		});
+
+		/**
+		 * Filter wp_mail to restrict email sending in staging environment.
+		 */
+		add_filter('wp_mail', [MailHandler::class, 'filter']);
+
+		/**
+		 * Prefix email subject with [Test mail]: in non-allowed environments.
+		 */
+		add_filter('wp_mail', [MailHandler::class, 'prefixSubject']);
 	}
 }
