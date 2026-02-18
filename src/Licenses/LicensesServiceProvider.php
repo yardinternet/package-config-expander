@@ -8,6 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use Yard\ConfigExpander\Licenses\Plugins\AdvancedCustomFieldsLicense;
 use Yard\ConfigExpander\Licenses\Plugins\FacetWPLicense;
 use Yard\ConfigExpander\Licenses\Plugins\GravityFormsLicense;
+use Yard\ConfigExpander\Licenses\Plugins\GravitySMTPLicense;
 use Yard\ConfigExpander\Licenses\Plugins\SearchWPLicense;
 use Yard\ConfigExpander\Licenses\Plugins\SeoPressLicense;
 use Yard\ConfigExpander\Licenses\Plugins\WpMigrateLicense;
@@ -30,6 +31,7 @@ class LicensesServiceProvider extends ServiceProvider
 		LicenseManager::make($licenses)->registerPlugins([
 			AdvancedCustomFieldsLicense::class,
 			GravityFormsLicense::class,
+			GravitySMTPLicense::class,
 			FacetWPLicense::class,
 			SearchWPLicense::class,
 			SeoPressLicense::class,

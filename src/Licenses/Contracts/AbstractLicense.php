@@ -28,8 +28,8 @@ abstract class AbstractLicense implements LicenseInterface
 
 	abstract public function register(): void;
 
-	protected function getLicense(): string
+	protected function getLicense(?string $configKey = null): string
 	{
-		return $this->licenses[static::LICENSE_CONFIG_KEY] ?? '';
+		return $this->licenses[$configKey ?? static::LICENSE_CONFIG_KEY] ?? '';
 	}
 }
