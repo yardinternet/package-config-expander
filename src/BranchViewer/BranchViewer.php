@@ -4,23 +4,35 @@ declare(strict_types=1);
 
 namespace Yard\ConfigExpander\BranchViewer;
 
+use DateTime;
+use DateTimeZone;
 use DomainException;
 use LogicException;
+use RuntimeException;
 
 class BranchViewer
 {
 	protected string $branchname;
+	protected string $releaseInfo;
 	private string $gitPath;
+	private string $releasePath;
 
-	public function __construct(string $gitPath)
+	public function __construct(string $gitPath, string $releasePath)
 	{
 		$this->gitPath = $gitPath;
+		$this->releasePath = $releasePath;
 		$this->branchname = $this->constructBranchname();
+		$this->releaseInfo = $this->constructReleaseInfo();
 	}
 
 	public function getBranchname(): string
 	{
 		return trim($this->branchname);
+	}
+
+	public function getReleaseInfo(): string
+	{
+		return trim($this->releaseInfo);
 	}
 
 	protected function constructBranchname(): string
@@ -33,6 +45,17 @@ class BranchViewer
 		return $this->extractBranchname($branches);
 	}
 
+    protected function constructReleaseInfo(): string
+	{
+		$releases = file($this->getReleaseLog(), FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+		if (false === $releases) {
+			$releases = [];
+		}
+
+		return $this->extractReleaseInfo($releases);
+	}
+
 	protected function getGitDirectory(): string
 	{
 		if (! file_exists($this->gitPath)) {
@@ -40,6 +63,15 @@ class BranchViewer
 		}
 
 		return $this->gitPath;
+	}
+
+	protected function getReleaseLog(): string
+	{
+		if (! file_exists($this->releasePath)) {
+			throw new DomainException('Release log does not exist');
+		}
+
+		return $this->releasePath;
 	}
 
 	/**
@@ -77,4 +109,35 @@ class BranchViewer
 		// Return the first 7 characters of the commit hash.
 		return sprintf('%s (commit)', substr($branch, 0, 7));
 	}
+
+    private function extractReleaseInfo(array $releases): string {
+        $release = end($releases);
+
+		if (empty($release)) {
+			throw new LogicException('No release found');
+		}
+
+        $data = json_decode($release, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new RuntimeException('Invalid release JSON');
+        }
+
+        $timezone = 'Europe/Amsterdam';
+
+        if (function_exists('get_option')) {
+            $timezone = get_option('timezone_string', 'Europe/Amsterdam');
+        }
+
+        $date = new DateTime($data['created_at']);
+        $date->setTimezone(new DateTimeZone($timezone));
+        $formattedDate = $date->format('d-m-Y - H:i:s');
+
+        return sprintf(
+            'Release #%s deployed on %s by %s',
+            $data['release_name'],
+            $formattedDate,
+            $data['user']
+        );
+    }
 }

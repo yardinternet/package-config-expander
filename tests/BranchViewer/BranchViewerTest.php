@@ -6,11 +6,14 @@ namespace Yard\ConfigExpander\Tests\BranchViewer;
 
 use DomainException;
 use LogicException;
+use RuntimeException;
 use Yard\ConfigExpander\BranchViewer\BranchViewer;
 
 beforeEach(function () {
 	$this->validGitPath = __DIR__ . '/test_git/HEAD';
+	$this->validReleasePath = __DIR__ . '/test_dep/releases_log';
 	$this->invalidGitPath = __DIR__ . '/invalid_git/HEAD';
+	$this->invalidReleasePath = __DIR__ . '/invalid_dep/releases_log';
 
 	if (! file_exists(dirname($this->validGitPath))) {
 		mkdir(dirname($this->validGitPath), 0777, true);
@@ -23,7 +26,7 @@ beforeEach(function () {
  * @preserveGlobalState disabled
  */
 test('constructBranchname throws DomainException if git directory does not exist', function () {
-	expect(fn () => new BranchViewer($this->invalidGitPath))
+	expect(fn () => new BranchViewer($this->invalidGitPath, $this->invalidReleasePath))
 		->toThrow(DomainException::class, 'Git directory does not exist');
 });
 
@@ -34,8 +37,9 @@ test('constructBranchname throws DomainException if git directory does not exist
  */
 test('constructBranchname throws LogicException if no branch name is found', function () {
 	file_put_contents($this->validGitPath, '');
+	file_put_contents($this->validReleasePath, '{"created_at":"2026-02-20T15:54:49+0000","release_name":"466","user":"rivanuff","target":"chore\/deployment-info"}');
 
-	expect(fn () => new BranchViewer($this->validGitPath))
+	expect(fn () => new BranchViewer($this->validGitPath, $this->validReleasePath))
 		->toThrow(LogicException::class, 'No branchname found');
 });
 
@@ -46,7 +50,47 @@ test('constructBranchname throws LogicException if no branch name is found', fun
  */
 test('getBranchname returns the branch name', function () {
 	file_put_contents($this->validGitPath, 'ref: refs/heads/feature/branchname');
+	file_put_contents($this->validReleasePath, '{"created_at":"2026-02-20T15:54:49+0000","release_name":"466","user":"rivanuff","target":"chore\/deployment-info"}');
 
-	$branchViewer = new BranchViewer($this->validGitPath);
+	$branchViewer = new BranchViewer($this->validGitPath, $this->validReleasePath);
 	expect($branchViewer->getBranchname())->toBe('feature/branchname');
+});
+
+/**
+ * @runInSeparateProcess
+ *
+ * @preserveGlobalState disabled
+ */
+test('constructReleaseInfo throws LogicException if no release is found', function () {
+	file_put_contents($this->validGitPath, 'ref: refs/heads/feature/branchname');
+	file_put_contents($this->validReleasePath, '');
+
+	expect(fn () => new BranchViewer($this->validGitPath, $this->validReleasePath))
+		->toThrow(LogicException::class, 'No release found');
+});
+
+/**
+ * @runInSeparateProcess
+ *
+ * @preserveGlobalState disabled
+ */
+test('getReleaseInfo returns RuntimeException when release JSON invalid', function () {
+	file_put_contents($this->validGitPath, 'ref: refs/heads/feature/branchname');
+	file_put_contents($this->validReleasePath, '{"created_at"|"2026-02-20T15:54:49+0000""release_name":"466","user":"rivanuff","target":"chore\/deployment-info"}');
+
+    expect(fn () => new BranchViewer($this->validGitPath, $this->validReleasePath))
+		->toThrow(RuntimeException::class, 'Invalid release JSON');
+});
+
+/**
+ * @runInSeparateProcess
+ *
+ * @preserveGlobalState disabled
+ */
+test('getReleaseInfo returns the release info', function () {
+	file_put_contents($this->validGitPath, 'ref: refs/heads/feature/branchname');
+	file_put_contents($this->validReleasePath, '{"created_at":"2026-02-20T15:54:49+0000","release_name":"466","user":"rivanuff","target":"chore\/deployment-info"}');
+
+	$branchViewer = new BranchViewer($this->validGitPath, $this->validReleasePath);
+	expect($branchViewer->getReleaseInfo())->toBe('Release #466 deployed on 20-02-2026 - 16:54:49 by rivanuff');
 });
