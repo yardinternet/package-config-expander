@@ -11,9 +11,14 @@ use Yard\ConfigExpander\BranchViewer\BranchViewerServiceProvider;
 beforeEach(function () {
 	$this->app->instance('path.public', __DIR__);
 	$this->validGitPath = __DIR__ . '/test_git/HEAD';
+	$this->validReleasePath = __DIR__ . '/test_dep/release_log';
 
 	if (! file_exists(dirname($this->validGitPath))) {
 		mkdir(dirname($this->validGitPath), 0777, true);
+	}
+
+	if (! file_exists(dirname($this->validReleasePath))) {
+		mkdir(dirname($this->validReleasePath), 0777, true);
 	}
 });
 
