@@ -5,3 +5,4 @@ vendor
 node_modules
 build
 tests/BranchViewer/test_git/HEAD
+tests/BranchViewer/test_dep/releases_log
