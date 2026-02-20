@@ -45,7 +45,7 @@ class BranchViewer
 		return $this->extractBranchname($branches);
 	}
 
-    protected function constructReleaseInfo(): string
+	protected function constructReleaseInfo(): string
 	{
 		$releases = file($this->getReleaseLog(), FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
@@ -110,34 +110,35 @@ class BranchViewer
 		return sprintf('%s (commit)', substr($branch, 0, 7));
 	}
 
-    private function extractReleaseInfo(array $releases): string {
-        $release = end($releases);
+	private function extractReleaseInfo(array $releases): string
+	{
+		$release = end($releases);
 
 		if (empty($release)) {
 			throw new LogicException('No release found');
 		}
 
-        $data = json_decode($release, true);
+		$data = json_decode($release, true);
 
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new RuntimeException('Invalid release JSON');
-        }
+		if (json_last_error() !== JSON_ERROR_NONE) {
+			throw new RuntimeException('Invalid release JSON');
+		}
 
-        $timezone = 'Europe/Amsterdam';
+		$timezone = 'Europe/Amsterdam';
 
-        if (function_exists('get_option')) {
-            $timezone = get_option('timezone_string', 'Europe/Amsterdam');
-        }
+		if (function_exists('get_option')) {
+			$timezone = get_option('timezone_string', 'Europe/Amsterdam');
+		}
 
-        $date = new DateTime($data['created_at']);
-        $date->setTimezone(new DateTimeZone($timezone));
-        $formattedDate = $date->format('d-m-Y - H:i:s');
+		$date = new DateTime($data['created_at']);
+		$date->setTimezone(new DateTimeZone($timezone));
+		$formattedDate = $date->format('d-m-Y - H:i:s');
 
-        return sprintf(
-            'Release #%s deployed on %s by %s',
-            $data['release_name'],
-            $formattedDate,
-            $data['user']
-        );
-    }
+		return sprintf(
+			'Release #%s deployed on %s by %s',
+			$data['release_name'],
+			$formattedDate,
+			$data['user']
+		);
+	}
 }

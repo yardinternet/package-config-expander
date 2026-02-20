@@ -41,12 +41,12 @@ class BranchViewerServiceProvider extends ServiceProvider
 			'title' => $title,
 		]);
 
-        if ($releaseInfo) {
-            $adminBar->add_menu([
-                'id'     => 'yard-release-info',
-                'parent' => 'yard-git-branch',
-                'title'  => $releaseInfo,
-            ]);
-        }
+		if ($releaseInfo) {
+			$adminBar->add_menu([
+				'id' => 'yard-release-info',
+				'parent' => 'yard-git-branch',
+				'title' => $releaseInfo,
+			]);
+		}
 	}
 }
