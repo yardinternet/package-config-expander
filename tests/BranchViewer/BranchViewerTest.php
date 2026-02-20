@@ -78,7 +78,7 @@ test('getReleaseInfo returns RuntimeException when release JSON invalid', functi
 	file_put_contents($this->validGitPath, 'ref: refs/heads/feature/branchname');
 	file_put_contents($this->validReleasePath, '{"created_at"|"2026-02-20T15:54:49+0000""release_name":"466","user":"rivanuff","target":"chore\/deployment-info"}');
 
-    expect(fn () => new BranchViewer($this->validGitPath, $this->validReleasePath))
+	expect(fn () => new BranchViewer($this->validGitPath, $this->validReleasePath))
 		->toThrow(RuntimeException::class, 'Invalid release JSON');
 });
 
