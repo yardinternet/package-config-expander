@@ -110,9 +110,9 @@ class BranchViewer
 		return sprintf('%s (commit)', substr($branch, 0, 7));
 	}
 
-    /**
-     * @param array<string> $releases
-     */
+	/**
+	 * @param array<string> $releases
+	 */
 	private function extractReleaseInfo(array $releases): ?string
 	{
 		$release = end($releases);
@@ -132,9 +132,9 @@ class BranchViewer
 		if (function_exists('get_option')) {
 			$timezoneOption = get_option('timezone_string', 'Europe/Amsterdam');
 
-            if (is_string($timezoneOption)) {
-                $timezone = $timezoneOption;
-            }
+			if (is_string($timezoneOption)) {
+				$timezone = $timezoneOption;
+			}
 		}
 
 		$date = new DateTime($data['created_at']);

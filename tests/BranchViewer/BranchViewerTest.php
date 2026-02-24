@@ -18,6 +18,10 @@ beforeEach(function () {
 	if (! file_exists(dirname($this->validGitPath))) {
 		mkdir(dirname($this->validGitPath), 0777, true);
 	}
+
+	if (! file_exists(dirname($this->validReleasePath))) {
+		mkdir(dirname($this->validReleasePath), 0777, true);
+	}
 });
 
 /**
