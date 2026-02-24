@@ -7,13 +7,13 @@ namespace Yard\ConfigExpander\BranchViewer;
 use DateTime;
 use DateTimeZone;
 use DomainException;
+use InvalidArgumentException;
 use LogicException;
-use RuntimeException;
 
 class BranchViewer
 {
 	protected string $branchname;
-	protected string $releaseInfo;
+	protected ?string $releaseInfo;
 	private string $gitPath;
 	private string $releasePath;
 
@@ -30,9 +30,9 @@ class BranchViewer
 		return trim($this->branchname);
 	}
 
-	public function getReleaseInfo(): string
+	public function getReleaseInfo(): ?string
 	{
-		return trim($this->releaseInfo);
+		return $this->releaseInfo;
 	}
 
 	protected function constructBranchname(): string
@@ -45,7 +45,7 @@ class BranchViewer
 		return $this->extractBranchname($branches);
 	}
 
-	protected function constructReleaseInfo(): string
+	protected function constructReleaseInfo(): ?string
 	{
 		$releases = file($this->getReleaseLog(), FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
@@ -110,18 +110,18 @@ class BranchViewer
 		return sprintf('%s (commit)', substr($branch, 0, 7));
 	}
 
-	private function extractReleaseInfo(array $releases): string
+	private function extractReleaseInfo(array $releases): ?string
 	{
 		$release = end($releases);
 
-		if (empty($release)) {
-			throw new LogicException('No release found');
+		if (! is_string($release) || '' === trim($release)) {
+			return null;
 		}
 
 		$data = json_decode($release, true);
 
-		if (json_last_error() !== JSON_ERROR_NONE) {
-			throw new RuntimeException('Invalid release JSON');
+		if (json_last_error() !== JSON_ERROR_NONE || ! is_string($data['created_at']) || ! is_string($data['user'])) {
+			throw new InvalidArgumentException('Invalid release JSON');
 		}
 
 		$timezone = 'Europe/Amsterdam';
@@ -135,10 +135,9 @@ class BranchViewer
 		$formattedDate = $date->format('d-m-Y - H:i:s');
 
 		return sprintf(
-			'Release #%s deployed on %s by %s',
-			$data['release_name'],
+			'Deployed on %s by %s',
 			$formattedDate,
-			$data['user']
+			trim($data['user'])
 		);
 	}
 }
