@@ -110,6 +110,9 @@ class BranchViewer
 		return sprintf('%s (commit)', substr($branch, 0, 7));
 	}
 
+    /**
+     * @param array<string> $releases
+     */
 	private function extractReleaseInfo(array $releases): ?string
 	{
 		$release = end($releases);
@@ -120,14 +123,18 @@ class BranchViewer
 
 		$data = json_decode($release, true);
 
-		if (json_last_error() !== JSON_ERROR_NONE || ! is_string($data['created_at']) || ! is_string($data['user'])) {
+		if (json_last_error() !== JSON_ERROR_NONE || ! is_array($data) || ! is_string($data['created_at']) || ! is_string($data['user'])) {
 			throw new InvalidArgumentException('Invalid release JSON');
 		}
 
 		$timezone = 'Europe/Amsterdam';
 
 		if (function_exists('get_option')) {
-			$timezone = get_option('timezone_string', 'Europe/Amsterdam');
+			$timezoneOption = get_option('timezone_string', 'Europe/Amsterdam');
+
+            if (is_string($timezoneOption)) {
+                $timezone = $timezoneOption;
+            }
 		}
 
 		$date = new DateTime($data['created_at']);
