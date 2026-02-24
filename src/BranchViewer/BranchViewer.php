@@ -47,7 +47,7 @@ class BranchViewer
 
 	protected function constructReleaseInfo(): ?string
 	{
-		$releases = file($this->getReleaseLog(), FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+		$releases = $this->getReleaseLog() ? file($this->getReleaseLog(), FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES): [];
 
 		if (false === $releases) {
 			$releases = [];
@@ -65,10 +65,10 @@ class BranchViewer
 		return $this->gitPath;
 	}
 
-	protected function getReleaseLog(): string
+	protected function getReleaseLog(): ?string
 	{
 		if (! file_exists($this->releasePath)) {
-			throw new DomainException('Release log does not exist');
+			return null;
 		}
 
 		return $this->releasePath;
