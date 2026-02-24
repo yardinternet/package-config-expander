@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Yard\ConfigExpander\Tests\BranchViewer;
 
 use DomainException;
+use InvalidArgumentException;
 use LogicException;
-use RuntimeException;
 use Yard\ConfigExpander\BranchViewer\BranchViewer;
 
 beforeEach(function () {
@@ -61,12 +61,12 @@ test('getBranchname returns the branch name', function () {
  *
  * @preserveGlobalState disabled
  */
-test('constructReleaseInfo throws LogicException if no release is found', function () {
+test('constructReleaseInfo to be null if no release is found', function () {
 	file_put_contents($this->validGitPath, 'ref: refs/heads/feature/branchname');
 	file_put_contents($this->validReleasePath, '');
 
-	expect(fn () => new BranchViewer($this->validGitPath, $this->validReleasePath))
-		->toThrow(LogicException::class, 'No release found');
+	$branchViewer = new BranchViewer($this->validGitPath, $this->validReleasePath);
+	expect($branchViewer->getReleaseInfo())->toBe(null);
 });
 
 /**
@@ -74,12 +74,12 @@ test('constructReleaseInfo throws LogicException if no release is found', functi
  *
  * @preserveGlobalState disabled
  */
-test('getReleaseInfo returns RuntimeException when release JSON invalid', function () {
+test('getReleaseInfo returns InvalidArgumentException when release JSON invalid', function () {
 	file_put_contents($this->validGitPath, 'ref: refs/heads/feature/branchname');
 	file_put_contents($this->validReleasePath, '{"created_at"|"2026-02-20T15:54:49+0000""release_name":"466","user":"rivanuff","target":"chore\/deployment-info"}');
 
 	expect(fn () => new BranchViewer($this->validGitPath, $this->validReleasePath))
-		->toThrow(RuntimeException::class, 'Invalid release JSON');
+		->toThrow(InvalidArgumentException::class, 'Invalid release JSON');
 });
 
 /**
@@ -92,5 +92,5 @@ test('getReleaseInfo returns the release info', function () {
 	file_put_contents($this->validReleasePath, '{"created_at":"2026-02-20T15:54:49+0000","release_name":"466","user":"rivanuff","target":"chore\/deployment-info"}');
 
 	$branchViewer = new BranchViewer($this->validGitPath, $this->validReleasePath);
-	expect($branchViewer->getReleaseInfo())->toBe('Release #466 deployed on 20-02-2026 - 16:54:49 by rivanuff');
+	expect($branchViewer->getReleaseInfo())->toBe('Deployed on 20-02-2026 - 16:54:49 by rivanuff');
 });
