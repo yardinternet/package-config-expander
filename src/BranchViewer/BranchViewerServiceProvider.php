@@ -33,7 +33,7 @@ class BranchViewerServiceProvider extends ServiceProvider
 			$title = sprintf('Branch: %s', $branch->getBranchname());
 			$releaseInfo = $branch->getReleaseInfo();
 		} catch (DomainException | LogicException | RuntimeException $e) {
-            $releaseInfo = null;
+			$releaseInfo = null;
 			$title = $e->getMessage();
 		}
 
