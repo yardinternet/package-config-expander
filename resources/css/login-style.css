@@ -28,12 +28,9 @@ body.login {
   border: none;
   margin-top: 0;
   background: var(--wp-login-color-bg-form);
+  color: var(--wp-login-color-text-light);
 
-  label {
-   color: var(--wp-login-color-text-light);
-  }
-
-  #wp-submit {
+  .button-primary{
    background: var(--wp-login-color-accent);
   }
 
@@ -50,16 +47,3 @@ body.login {
  }
 }
 
-/* Wordfence 2fa prompt */
-#wfls-prompt-overlay {
- align-items: flex-start;
- background: var(--wp-login-color-bg-form);
-
- .wfls-tooltip-trigger {
-  color: var(--wp-login-color-accent);
- }
-
- #wfls-token-submit {
-  background: var(--wp-login-color-accent);
- }
-}
