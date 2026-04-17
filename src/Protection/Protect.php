@@ -87,7 +87,7 @@ class Protect
 	protected function denyAccess(): void
 	{
 		header('HTTP/1.0 401 Unauthorized');
-		echo __('You\'re not allowed to view this page.', 'config-expander');
+		echo __('Viewing this page requires a login session. Please log in first.', 'config-expander');
 		exit;
 	}
 
