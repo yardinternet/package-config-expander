@@ -90,7 +90,8 @@ class Protect
 
 		$showIp = function_exists('get_field') && (bool) get_field('show_ip_on_deny', 'options');
 		$loginProtected = function_exists('get_field') && in_array(get_field('type_protection_website', 'options'), ['login', 'both'], true);
-		if ($showIp && $loginProtected) {
+
+        if ($showIp && $loginProtected) {
 			$message .= ' ' . sprintf(
 				/* translators: %s: visitor IP address */
 				__('Your IP address is %s. Please contact the administrator to request a whitelist.', 'config-expander'),
