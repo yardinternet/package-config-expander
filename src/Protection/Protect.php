@@ -88,7 +88,6 @@ class Protect
 	{
 		$message = __('Viewing this page requires a login session. Please log in first.', 'config-expander');
 
-
 		$showIp = function_exists('get_field') && (bool) get_field('show_ip_on_deny', 'options');
 		$loginProtected = function_exists('get_field') && in_array(get_field('type_protection_website', 'options'), ['login', 'both'], true);
 		if ($showIp && $loginProtected) {
