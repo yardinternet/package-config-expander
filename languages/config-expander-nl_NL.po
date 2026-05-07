@@ -19,6 +19,19 @@ msgstr "De vereiste plugin voor de Config Expander package <strong>Advanced Cust
 msgid "This link does not work, go to our website: <a href=\"%s\">%s</a>."
 msgstr "Deze link bestaat niet, ga naar onze website: <a href=\"%s\">%s</a>."
 
-#: src/Protection/Protect.php:80
+#: src/Protection/Protect.php:89
 msgid "Viewing this page requires a login session. Please log in first."
 msgstr "Het bekijken van deze pagina vereist een login sessie. Graag eerst inloggen."
+
+#. translators: %s: visitor IP address
+#: src/Protection/Protect.php:93
+msgid "Your IP address is %s. Please contact the administrator to request a whitelist."
+msgstr "Jouw IP-adres is %s. Neem contact op met de beheerder om een whitelist aan te vragen."
+
+#: src/Protection/Protect.php:101
+msgid "Access Denied"
+msgstr "Toegang geweigerd"
+
+#: src/Protection/Protect.php:105
+msgid "Go to login page"
+msgstr "Ga naar de inlogpagina"
