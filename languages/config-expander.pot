@@ -20,6 +20,19 @@ msgstr ""
 msgid "This link does not work, go to our website: <a href=\"%s\">%s</a>."
 msgstr ""
 
-#: src/Protection/Protect.php:80
-msgid "You're not allowed to view this page."
+#: src/Protection/Protect.php:89
+msgid "Viewing this page requires a login session. Please log in first."
+msgstr ""
+
+#. translators: %s: visitor IP address
+#: src/Protection/Protect.php:93
+msgid "Your IP address is %s. Please contact the administrator to request a whitelist."
+msgstr ""
+
+#: src/Protection/Protect.php:101
+msgid "Access Denied"
+msgstr ""
+
+#: src/Protection/Protect.php:105
+msgid "Go to login page"
 msgstr ""
