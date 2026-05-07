@@ -37,7 +37,7 @@ class Protect
 	 */
 	protected function setNoCacheHeader(): void
 	{
-		header('Cache-Control: no-cache');
+		nocache_headers();
 	}
 
 	protected function checkIfVisitorHasAccess(string $type): bool
@@ -86,9 +86,25 @@ class Protect
 
 	protected function denyAccess(): void
 	{
-		header('HTTP/1.0 401 Unauthorized');
-		echo __('Viewing this page requires a login session. Please log in first.', 'config-expander');
-		exit;
+		$message = __('Viewing this page requires a login session. Please log in first.', 'config-expander');
+
+		if (function_exists('get_field') && (bool) get_field('show_ip_on_deny', 'options') && in_array(get_field('type_protection_website', 'options'), ['login', 'both'], true)) {
+			$message .= ' ' . sprintf(
+				/* translators: %s: visitor IP address */
+				__('Your IP address is %s. Please contact the administrator to request a whitelist.', 'config-expander'),
+				esc_html($this->ipCurrentVisitor())
+			);
+		}
+
+		wp_die(
+			$message,
+			__('Access Denied', 'config-expander'),
+			[
+				'response' => 401,
+				'link_url' => wp_login_url(),
+				'link_text' => __('Go to login page', 'config-expander'),
+			]
+		);
 	}
 
 	protected function ipCurrentVisitor(): string
