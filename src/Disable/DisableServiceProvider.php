@@ -52,7 +52,7 @@ class DisableServiceProvider extends ServiceProvider
 			define('AUTOSAVE_INTERVAL', $settings['AUTOSAVE_INTERVAL']);
 		}
 
-		if (! empty($settings['ADMIN_EMAIL_CHECK_INTERVAL']) && is_int($settings['ADMIN_EMAIL_CHECK_INTERVAL'])) {
+		if (isset($settings['ADMIN_EMAIL_CHECK_INTERVAL']) && is_int($settings['ADMIN_EMAIL_CHECK_INTERVAL'])) {
 			add_filter('admin_email_check_interval', fn (): int => $settings['ADMIN_EMAIL_CHECK_INTERVAL']);
 		}
 
