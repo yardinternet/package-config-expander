@@ -132,7 +132,7 @@ class BranchViewer
 		if (function_exists('get_option')) {
 			$timezoneOption = get_option('timezone_string', 'Europe/Amsterdam');
 
-			if (is_string($timezoneOption)) {
+			if (is_string($timezoneOption) && 0 < strlen($timezoneOption)) {
 				$timezone = $timezoneOption;
 			}
 		}
