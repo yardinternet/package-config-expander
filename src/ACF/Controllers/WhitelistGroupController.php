@@ -30,11 +30,21 @@ class WhitelistGroupController
 	{
 		['group' => $group, 'rows' => $rows] = $this->getGroupWithRows();
 
+		$originalRows = array_values($rows);
+
 		$this->addDefaultsWhenAbsent($rows, $this->mapExistingIps($rows));
 
-		$group[$this->repeaterName] = array_values($rows);
+		$rows = array_values($rows);
 
-		update_field($this->groupName, $group, 'option');
+		// Only write when a default was actually missing: this runs on every
+		// `acf/init` (every request), so writing unconditionally means an ACF
+		// options read + write on every page load for no reason once the
+		// defaults are already in place.
+		if ($rows !== $originalRows) {
+			$group[$this->repeaterName] = $rows;
+
+			update_field($this->groupName, $group, 'option');
+		}
 
 		$this->setDefaultsReadonly();
 	}
