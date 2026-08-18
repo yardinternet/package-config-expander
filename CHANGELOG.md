@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [v1.6.0] - 2026-08-18
+
+-   Feat: register gravitysmtp generic password and force from email
+
 ## [v1.5.2] - 2026-08-12
 
 -   Change: don't force defaults IP whitelist on every request without changes
