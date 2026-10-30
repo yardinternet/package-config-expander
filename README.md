@@ -122,6 +122,12 @@ $config = [
 The provided classes are designed to manage the settings and cleanup tasks for various plugins within a WordPress environment.
 These classes must extend the common base class `BaseAbstract` and include methods to handle both single-site and multi-site configurations.
 
+## Site visibility
+
+While the frontend is blocked, the site's `public` flag is set to `0`, so `wp site list` reports it as non-public. That is the case when `maintenance_mode` is on, or when `type_protection_website` protects the frontend. An admin-only block leaves the frontend served and does not change the flag.
+
+The value the flag held is kept in the `yard_config_expander_blog_public` option and put back when the block lifts, unless it has been changed by hand in the meantime. Note that `blog_public` is also WordPress' search engine visibility setting, so a site whose flag is down serves `noindex` as well.
+
 ## Hooks
 
 The hooks are divided by sections based on the package directories.

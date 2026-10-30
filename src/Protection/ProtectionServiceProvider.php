@@ -32,6 +32,24 @@ class ProtectionServiceProvider extends ServiceProvider
 		add_action('admin_bar_menu', $this->showProtectionStatus(...), 9999, 1);
 		add_filter('varnish_http_purge_events', $this->addCustomPurgeEvent(...));
 		add_filter('varnish_http_purge_events_full', $this->addCustomPurgeEvent(...));
+		add_action('acf/init', $this->syncPublicFlag(...), 30, 0);
+		add_action('yard::config-expander/acf/settings-updated', $this->syncPublicFlag(...));
+	}
+
+	/**
+	 * Runs after ProtectionTypeController has had its say on acf/init, so an
+	 * environment that overrules the protection type is already accounted for.
+	 */
+	public function syncPublicFlag(): void
+	{
+		if (! function_exists('get_field')) {
+			return;
+		}
+
+		/** @var Protect $protect */
+		$protect = resolve('protect');
+
+		PublicFlag::reconcile($protect->frontendIsBlocked());
 	}
 
 	public function enqueueProtectionStyles(): void
