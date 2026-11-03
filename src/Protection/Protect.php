@@ -18,6 +18,11 @@ class Protect
 		$this->authorizeAccess('login');
 	}
 
+	public function frontendIsBlocked(): bool
+	{
+		return $this->maintenanceModeEnabled() || in_array('site', $this->getProtectionTypesWebsite(), true);
+	}
+
 	protected function authorizeAccess(string $type): void
 	{
 		if ($this->maintenanceModeEnabled() && $this->shouldShowMaintenancePage()) {
