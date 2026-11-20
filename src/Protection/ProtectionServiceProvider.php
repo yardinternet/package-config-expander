@@ -108,6 +108,10 @@ class ProtectionServiceProvider extends ServiceProvider
 			return false;
 		}
 
+		if ('1' === ($_SERVER['IP_IS_ALLOWLISTED'] ?? '')) {
+			return false;
+		}
+
 		return true;
 	}
 }

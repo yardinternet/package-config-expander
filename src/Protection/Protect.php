@@ -20,7 +20,7 @@ class Protect
 
 	protected function authorizeAccess(string $type): void
 	{
-		if ($this->maintenanceModeEnabled() && $this->shouldShowMaintenancePage()) {
+		if ($this->maintenanceModeEnabled() && $this->shouldShowMaintenancePage() && ! $this->visitorIsWhitelisted('site')) {
 			$this->getMaintenancePage();
 		}
 
@@ -60,6 +60,29 @@ class Protect
 			if ($this->ipCurrentVisitor() !== $whitelistEntity->ipAddress()) {
 				continue;
 			}
+
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Unlike checkIfVisitorHasAccess this ignores the protection types of the website,
+	 * because frontend protection is forced off in production while maintenance mode is still used there.
+	 */
+	protected function visitorIsWhitelisted(string $type): bool
+	{
+		foreach ($this->getWhitelistedEntities() as $whitelistEntity) {
+			if (! $this->currentProtectionTypeMatchesWhitelist($type, $whitelistEntity)) {
+				continue;
+			}
+
+			if ($this->ipCurrentVisitor() !== $whitelistEntity->ipAddress()) {
+				continue;
+			}
+
+			$this->setNoCacheHeader();
 
 			return true;
 		}
