@@ -6,7 +6,6 @@ namespace Yard\ConfigExpander\ACF;
 
 use Illuminate\Support\ServiceProvider;
 use Yard\ConfigExpander\ACF\Controllers\ProtectionTypeController;
-use Yard\ConfigExpander\ACF\Controllers\WhitelistGroupController;
 use Yard\ConfigExpander\Support\Traits\PluginActive;
 use Yard\ConfigExpander\Support\Traits\Route;
 
@@ -34,7 +33,6 @@ class ACFServiceProvider extends ServiceProvider
 		add_action('acf/init', $this->init(...), 10, 0);
 		add_action('acf/save_post', $this->doActionOptionsUpdated(...), 20);
 		add_action('acf/include_fields', $this->addLocalFieldGroup(...), 10, 0);
-		add_action('acf/init', (new WhitelistGroupController())->forceDefaults(...), 20, 0);
 		add_action('acf/init', (new ProtectionTypeController())->disableFrontendProtection(...), 20, 0);
 	}
 
